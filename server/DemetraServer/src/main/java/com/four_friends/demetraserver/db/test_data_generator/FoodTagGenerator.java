@@ -6,6 +6,8 @@
 package com.four_friends.demetraserver.db.test_data_generator;
 
 import com.four_friends.demetraserver.entity.FoodTag;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -44,6 +46,19 @@ public class FoodTagGenerator {
 
     public static FoodTag createShawarmaTag() {
         return new FoodTag("Шаверма");
+    }
+    
+    public static List<FoodTag> getAllFoodTags(){
+        List<FoodTag> foodTags = new ArrayList<>();
+        foodTags.add(createAsianTag());
+        foodTags.add(createBisnessLanchTag());
+        foodTags.add(createBurgerTag());
+        foodTags.add(createFastFoodTag());
+        foodTags.add(createItalianTag());
+        foodTags.add(createRussianTag());
+        foodTags.add(createShawarmaTag());
+        foodTags.add(createVegeterianTag());
+        return foodTags;
     }
     
     
