@@ -14,8 +14,6 @@ import java.util.Objects;
  */
 @DatabaseTable
 public class CityMall extends Entity{
-    @DatabaseField(generatedId = true)
-    private long id;
     
     @DatabaseField
     private String name;
@@ -42,15 +40,6 @@ public class CityMall extends Entity{
     
     @DatabaseField
     private String url;
-    
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

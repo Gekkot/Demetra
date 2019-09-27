@@ -3,9 +3,7 @@ package com.four_friends.demetraserver.entity;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,10 +12,8 @@ import java.util.Set;
  * @author gekko
  */
 @DatabaseTable
-public class Profile {
-    
-    @DatabaseField(generatedId = true)
-    private long id;
+public class Profile extends Entity{
+ 
     
     @DatabaseField
     String name;
@@ -28,14 +24,6 @@ public class Profile {
     private Long[] foodIds = new Long[]{};
 
     public Profile() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
