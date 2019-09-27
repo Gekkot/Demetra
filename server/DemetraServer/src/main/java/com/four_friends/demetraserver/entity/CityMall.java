@@ -1,5 +1,7 @@
 package com.four_friends.demetraserver.entity;
 
+import com.four_friends.demetraserver.util.LocationHelper;
+import com.four_friends.demetraserver.util.exception.WrongLocationException;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -134,7 +136,9 @@ public class CityMall extends Entity{
         setRestarauntIds(updatedRestarauntIds);
     }
     
-    private int calClusterId(){
-        return 0;
+    public long calClusterId() throws WrongLocationException{
+        long locationToClusterIndex = LocationHelper.LocationToClusterIndex(latitude, longitude);
+        this.clusterId = locationToClusterIndex;
+        return locationToClusterIndex;
     }
 }
