@@ -7,21 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA6978CB82EFE036A04718DA /* Pods_DemetraProjectIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0BC757B98C68E23B7F0B41 /* Pods_DemetraProjectIOS.framework */; };
 		FDF7A0D5233E681F0094A2E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0D4233E681F0094A2E3 /* AppDelegate.swift */; };
-		FDF7A0D7233E681F0094A2E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0D6233E681F0094A2E3 /* ViewController.swift */; };
+		FDF7A0D7233E681F0094A2E3 /* MarketCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0D6233E681F0094A2E3 /* MarketCenterViewController.swift */; };
 		FDF7A0DA233E681F0094A2E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF7A0D8233E681F0094A2E3 /* Main.storyboard */; };
 		FDF7A0DC233E68200094A2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF7A0DB233E68200094A2E3 /* Assets.xcassets */; };
 		FDF7A0DF233E68200094A2E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF7A0DD233E68200094A2E3 /* LaunchScreen.storyboard */; };
+		FDF7A0E7233E6A450094A2E3 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */; };
+		FDF7A0E9233E6A870094A2E3 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0E8233E6A870094A2E3 /* ContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CA63A704661A098A1A12C12 /* Pods-DemetraProjectIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemetraProjectIOS.debug.xcconfig"; path = "Target Support Files/Pods-DemetraProjectIOS/Pods-DemetraProjectIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		44204145307A234E5CD19777 /* Pods-DemetraProjectIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemetraProjectIOS.release.xcconfig"; path = "Target Support Files/Pods-DemetraProjectIOS/Pods-DemetraProjectIOS.release.xcconfig"; sourceTree = "<group>"; };
+		AE0BC757B98C68E23B7F0B41 /* Pods_DemetraProjectIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemetraProjectIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF7A0D1233E681F0094A2E3 /* DemetraProjectIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemetraProjectIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF7A0D4233E681F0094A2E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDF7A0D6233E681F0094A2E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FDF7A0D6233E681F0094A2E3 /* MarketCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCenterViewController.swift; sourceTree = "<group>"; };
 		FDF7A0D9233E681F0094A2E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDF7A0DB233E68200094A2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDF7A0DE233E68200094A2E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDF7A0E0233E68200094A2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		FDF7A0E8233E6A870094A2E3 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6978CB82EFE036A04718DA /* Pods_DemetraProjectIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		266B22DEBA335BA4E639F825 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CA63A704661A098A1A12C12 /* Pods-DemetraProjectIOS.debug.xcconfig */,
+				44204145307A234E5CD19777 /* Pods-DemetraProjectIOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F9E26020166ECC37B947BE31 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BC757B98C68E23B7F0B41 /* Pods_DemetraProjectIOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FDF7A0C8233E681F0094A2E3 = {
 			isa = PBXGroup;
 			children = (
 				FDF7A0D3233E681F0094A2E3 /* DemetraProjectIOS */,
 				FDF7A0D2233E681F0094A2E3 /* Products */,
+				266B22DEBA335BA4E639F825 /* Pods */,
+				F9E26020166ECC37B947BE31 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +84,23 @@
 			isa = PBXGroup;
 			children = (
 				FDF7A0D4233E681F0094A2E3 /* AppDelegate.swift */,
-				FDF7A0D6233E681F0094A2E3 /* ViewController.swift */,
+				FDF7A0EA233E6A980094A2E3 /* ViewControllers */,
 				FDF7A0D8233E681F0094A2E3 /* Main.storyboard */,
 				FDF7A0DB233E68200094A2E3 /* Assets.xcassets */,
 				FDF7A0DD233E68200094A2E3 /* LaunchScreen.storyboard */,
 				FDF7A0E0233E68200094A2E3 /* Info.plist */,
 			);
 			path = DemetraProjectIOS;
+			sourceTree = "<group>";
+		};
+		FDF7A0EA233E6A980094A2E3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDF7A0D6233E681F0094A2E3 /* MarketCenterViewController.swift */,
+				FDF7A0E8233E6A870094A2E3 /* ContainerViewController.swift */,
+				FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +110,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDF7A0E3233E68200094A2E3 /* Build configuration list for PBXNativeTarget "DemetraProjectIOS" */;
 			buildPhases = (
+				03B0127632E5807CB597BC83 /* [CP] Check Pods Manifest.lock */,
 				FDF7A0CD233E681F0094A2E3 /* Sources */,
 				FDF7A0CE233E681F0094A2E3 /* Frameworks */,
 				FDF7A0CF233E681F0094A2E3 /* Resources */,
+				FB7BD6A1D22284B03790DC76 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +171,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03B0127632E5807CB597BC83 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DemetraProjectIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB7BD6A1D22284B03790DC76 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DemetraProjectIOS/Pods-DemetraProjectIOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DemetraProjectIOS/Pods-DemetraProjectIOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DemetraProjectIOS/Pods-DemetraProjectIOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDF7A0CD233E681F0094A2E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDF7A0D7233E681F0094A2E3 /* ViewController.swift in Sources */,
+				FDF7A0D7233E681F0094A2E3 /* MarketCenterViewController.swift in Sources */,
+				FDF7A0E7233E6A450094A2E3 /* SideMenuViewController.swift in Sources */,
+				FDF7A0E9233E6A870094A2E3 /* ContainerViewController.swift in Sources */,
 				FDF7A0D5233E681F0094A2E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +365,7 @@
 		};
 		FDF7A0E4233E68200094A2E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CA63A704661A098A1A12C12 /* Pods-DemetraProjectIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +384,7 @@
 		};
 		FDF7A0E5233E68200094A2E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44204145307A234E5CD19777 /* Pods-DemetraProjectIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

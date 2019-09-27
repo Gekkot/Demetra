@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SideMenuViewController.swift
 //  DemetraProjectIOS
 //
 //  Created by Хафизов Руслан on 27/09/2019.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SideMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        self.view.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
     }
 
-
 }
-
