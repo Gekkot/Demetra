@@ -1,11 +1,13 @@
 package com.four_friends.demetraserver.entity;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  *
  * @author gekko
  */
+@DatabaseTable
 public class Owner {
 
     @DatabaseField(generatedId = true)
