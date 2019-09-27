@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navigation_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="30mm"
+        android:src="@mipmap/drawer_logo"
+        android:background="@color/colorGray"
+        android:layout_gravity="left"
+        android:scaleType="fitStart"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_main_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

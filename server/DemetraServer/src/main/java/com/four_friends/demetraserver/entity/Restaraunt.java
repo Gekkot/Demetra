@@ -10,9 +10,6 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable
 public class Restaraunt extends Entity {
 
-    @DatabaseField(generatedId = true)
-    private long id;
-
     @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
 
@@ -44,14 +41,6 @@ public class Restaraunt extends Entity {
     public Restaraunt(Owner owner) {
         this.name = owner.getOwnerRestarauntName();
         this.ownerID = owner.getId();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
