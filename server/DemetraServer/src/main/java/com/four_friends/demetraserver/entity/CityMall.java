@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.four_friends.demetraserver.entity;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +12,7 @@ import java.util.Objects;
  *
  * @author gekko
  */
+@DatabaseTable
 public class CityMall extends Entity{
     @DatabaseField(generatedId = true)
     private long id;
