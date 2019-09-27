@@ -1,11 +1,13 @@
 package com.example.demetra;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 
@@ -24,6 +27,8 @@ public class TrkListFragment extends Fragment {
     private trkAdapter mTrkAdapter;
     private GoogleMap mMap;
     private static String TAG = "trkListFragment";
+
+    private OnMapButtonListener mOnMapButtonListener;
 
     /*@Override
     public void onMapReady(GoogleMap googleMap) {
@@ -72,13 +77,39 @@ public class TrkListFragment extends Fragment {
 
     private class TrkHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        TextView mTrkName;
+        TextView mTrkDistance;
+        ImageView mOnMapImageView;
+
         public TrkHolder(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_trk, parent, false));
         }
 
+        public void bind(int position)
+        {
+            mTrkName = this.itemView.findViewById(R.id.trk_name);
+            mTrkName.setText(MainSinglet.get().getNameTrk(position));
+            mTrkDistance =  this.itemView.findViewById(R.id.trk_distance);
+            mTrkDistance.setText(MainSinglet.get().getDistanceTrk(position));
+            mOnMapImageView = this.itemView.findViewById(R.id.image_on_map);
+            mOnMapImageView.setImageResource(R.mipmap.show_in_map_button);
+            this.itemView.setOnClickListener(this);
+            mOnMapImageView.setOnClickListener(this);
+        }
+
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
+            if(view.equals(mOnMapImageView)) {
+                //Toast.makeText(getActivity(), this.getPosition() + "button", Toast.LENGTH_SHORT).show();
+                if(mOnMapButtonListener != null) {
+                    mOnMapButtonListener.OnMapButtonClick(view, MainSinglet.get().getLatLngTrk(this.getPosition()), mTrkName.getText().toString());
+                }
+            }
+            else {
+                Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), RestarantListActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -92,11 +123,12 @@ public class TrkListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull TrkHolder holder, int position) {
-            TextView tv= (TextView) holder.itemView.findViewById(R.id.trk_name);
+/*            TextView tv= (TextView) holder.itemView.findViewById(R.id.trk_name);
             holder.itemView.setOnClickListener(holder);
             tv.setText(MainSinglet.get().getNameTrk(position));
             tv= (TextView) holder.itemView.findViewById(R.id.trk_distance);
-            tv.setText(MainSinglet.get().getDistanceTrk(position));
+            tv.setText(MainSinglet.get().getDistanceTrk(position));*/
+            holder.bind(position);
         }
 
         @Override
@@ -128,5 +160,13 @@ public class TrkListFragment extends Fragment {
 
     public void onUpdateLocation(double lat, double lon){
         new FetchTrkTask(lat, lon).execute();
+    }
+
+    interface OnMapButtonListener{
+        void OnMapButtonClick(View view, LatLng latLng, String trkName);
+    }
+
+    public void setOnMapButtonListener(OnMapButtonListener listener){
+        mOnMapButtonListener = listener;
     }
 }

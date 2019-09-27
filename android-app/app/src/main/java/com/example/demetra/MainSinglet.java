@@ -2,6 +2,8 @@ package com.example.demetra;
 
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +13,8 @@ public class MainSinglet {
     private static MainSinglet mMainSinglet = null;
     private static String TAG = "MainSinglet";
     private JSONArray mJSONArrayTrk;
+    private LatLng mCurrentLatLon;
+    private JSONArray mJSONArraySelectedTrkRestarant;
 
     private MainSinglet(){
         
@@ -43,7 +47,7 @@ public class MainSinglet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return "name";
+        return "null";
     }
 
     public String getDistanceTrk(int position) {
@@ -53,5 +57,36 @@ public class MainSinglet {
     public int getCountTrk() {
         if(mJSONArrayTrk == null) return 0;
         return mJSONArrayTrk.length();
+    }
+
+    public LatLng getLatLngTrk(int position){
+        LatLng ret = new LatLng(0.0, 0.0);
+        try {
+            JSONObject obj = mJSONArrayTrk.getJSONObject(position);
+            return new LatLng(obj.getDouble("latitude"), obj.getDouble("longitude"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new LatLng(0.0, 0.0);
+    }
+
+    public void setMyLatLng(LatLng currentPos){
+        mCurrentLatLon = currentPos;
+    }
+    public LatLng getMyCurrentLatLng(){
+        return mCurrentLatLon;
+    }
+
+    public void selectTrk(int position){
+        try {
+            JSONObject obj = mJSONArrayTrk.getJSONObject(position);
+            mJSONArraySelectedTrkRestarant = obj.getJSONArray("restaurants");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public JSONArray getSelectedTrkRestarant(){
+        return mJSONArraySelectedTrkRestarant;
     }
 }

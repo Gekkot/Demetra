@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" >
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/image_on_map"
             android:layout_width="match_parent"
             android:layout_height="10mm"
             tools:src="@mipmap/ic_launcher" />
@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="3mm"
             android:textSize="2mm"
+            android:gravity="center"
             android:text="@string/on_map" />
     </LinearLayout>
 
@@ -83,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="3mm"
             android:textSize="2mm"
+            android:gravity="center"
             android:text="@string/busy" />
     </LinearLayout>
 
