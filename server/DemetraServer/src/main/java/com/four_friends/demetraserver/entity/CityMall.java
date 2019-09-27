@@ -136,7 +136,7 @@ public class CityMall extends Entity{
         setRestarauntIds(updatedRestarauntIds);
     }
     
-    private long calClusterId() throws WrongLocationException{
+    public long calClusterId() throws WrongLocationException{
         long locationToClusterIndex = LocationHelper.LocationToClusterIndex(latitude, longitude);
         this.clusterId = locationToClusterIndex;
         return locationToClusterIndex;
