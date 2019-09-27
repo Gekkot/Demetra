@@ -70,30 +70,30 @@ public class TrkListFragment extends Fragment {
         }
     };
 
-    private class trkHolder extends RecyclerView.ViewHolder {
-        public trkHolder(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_trk,parent ,false));
+    private class TrkHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        public TrkHolder(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_trk, parent, false));
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class trkAdapter extends RecyclerView.Adapter<trkHolder>{
+    private class trkAdapter extends RecyclerView.Adapter<TrkHolder>{
         @NonNull
         @Override
-        public trkHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public TrkHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inf = LayoutInflater.from(getActivity());
-            return new trkHolder(inf, parent);
+            return new TrkHolder(inf, parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull trkHolder holder, int position) {
+        public void onBindViewHolder(@NonNull TrkHolder holder, int position) {
             TextView tv= (TextView) holder.itemView.findViewById(R.id.trk_name);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getActivity(), "onClick", Toast.LENGTH_LONG).show();
-                    new FetchTrkTask(40,60).execute();
-                }
-            });
+            holder.itemView.setOnClickListener(holder);
             tv.setText(MainSinglet.get().getNameTrk(position));
             tv= (TextView) holder.itemView.findViewById(R.id.trk_distance);
             tv.setText(MainSinglet.get().getDistanceTrk(position));

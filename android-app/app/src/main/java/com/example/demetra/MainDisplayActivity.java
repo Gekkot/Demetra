@@ -73,8 +73,21 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
 
         Fragment fragment = fm.findFragmentById(R.id.list_container);
         if(fragment == null){
-            fragment = new TrkListFragment();
-            fm.beginTransaction().add(R.id.list_container, fragment).commit();
+            mTrkListFragment = new TrkListFragment();
+            fm.beginTransaction().add(R.id.list_container, mTrkListFragment).commit();
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Проверка наличия разрешений
+            // Если нет разрешения на использование соответсвующих разркешений выполняем какие-то действия
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQ_LOCATION_PERMISSION);
+        } else {
+            LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
         }
     }
 
