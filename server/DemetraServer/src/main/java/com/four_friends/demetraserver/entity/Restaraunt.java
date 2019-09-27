@@ -8,28 +8,29 @@ import com.j256.ormlite.table.DatabaseTable;
  * @author gekko
  */
 @DatabaseTable
-public class Restaraunt extends Entity{
-       @DatabaseField(generatedId = true)
+public class Restaraunt extends Entity {
+
+    @DatabaseField(generatedId = true)
     private long id;
-    
+
     @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
-    
+
     @DatabaseField
     private String city;
-    
+
     @DatabaseField
     private String address;
-    
+
     @DatabaseField
     private long latitude;
-    
+
     @DatabaseField
     private long longitude;
-    
+
     @DatabaseField
     private long cityMollID;
-    
+
     @DatabaseField
     private long ownerID;
 
@@ -39,8 +40,8 @@ public class Restaraunt extends Entity{
     public Restaraunt(String name) {
         this.name = name;
     }
-    
-    public Restaraunt(Owner owner){
+
+    public Restaraunt(Owner owner) {
         this.name = owner.getOwnerRestarauntName();
         this.ownerID = owner.getId();
     }
@@ -108,5 +109,5 @@ public class Restaraunt extends Entity{
     public void setOwnerID(long ownerID) {
         this.ownerID = ownerID;
     }
-    
+
 }
