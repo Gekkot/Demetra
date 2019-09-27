@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		FDF7A0DF233E68200094A2E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF7A0DD233E68200094A2E3 /* LaunchScreen.storyboard */; };
 		FDF7A0E7233E6A450094A2E3 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */; };
 		FDF7A0E9233E6A870094A2E3 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0E8233E6A870094A2E3 /* ContainerViewController.swift */; };
+		FDF7A0EC233E87580094A2E3 /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0EB233E87580094A2E3 /* MenuTableCell.swift */; };
+		FDF7A0EF233E8E450094A2E3 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A0EE233E8E450094A2E3 /* MenuModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		FDF7A0E0233E68200094A2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		FDF7A0E8233E6A870094A2E3 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		FDF7A0EB233E87580094A2E3 /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
+		FDF7A0EE233E8E450094A2E3 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +54,6 @@
 				0CA63A704661A098A1A12C12 /* Pods-DemetraProjectIOS.debug.xcconfig */,
 				44204145307A234E5CD19777 /* Pods-DemetraProjectIOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -86,6 +89,8 @@
 				FDF7A0D4233E681F0094A2E3 /* AppDelegate.swift */,
 				FDF7A0EA233E6A980094A2E3 /* ViewControllers */,
 				FDF7A0D8233E681F0094A2E3 /* Main.storyboard */,
+				FDF7A0ED233E87720094A2E3 /* Views and Cells */,
+				FDF7A0F0233E8E600094A2E3 /* Models and Classes */,
 				FDF7A0DB233E68200094A2E3 /* Assets.xcassets */,
 				FDF7A0DD233E68200094A2E3 /* LaunchScreen.storyboard */,
 				FDF7A0E0233E68200094A2E3 /* Info.plist */,
@@ -101,6 +106,22 @@
 				FDF7A0E6233E6A450094A2E3 /* SideMenuViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FDF7A0ED233E87720094A2E3 /* Views and Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FDF7A0EB233E87580094A2E3 /* MenuTableCell.swift */,
+			);
+			path = "Views and Cells";
+			sourceTree = "<group>";
+		};
+		FDF7A0F0233E8E600094A2E3 /* Models and Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FDF7A0EE233E8E450094A2E3 /* MenuModel.swift */,
+			);
+			path = "Models and Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +241,9 @@
 			files = (
 				FDF7A0D7233E681F0094A2E3 /* MarketCenterViewController.swift in Sources */,
 				FDF7A0E7233E6A450094A2E3 /* SideMenuViewController.swift in Sources */,
+				FDF7A0EF233E8E450094A2E3 /* MenuModel.swift in Sources */,
 				FDF7A0E9233E6A870094A2E3 /* ContainerViewController.swift in Sources */,
+				FDF7A0EC233E87580094A2E3 /* MenuTableCell.swift in Sources */,
 				FDF7A0D5233E681F0094A2E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
