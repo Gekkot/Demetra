@@ -25,6 +25,7 @@ public class RestarauntServlet extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpHelper.answerError(resp, new UnsupportedOperationException("not implement yet"));
     }
     
 }
