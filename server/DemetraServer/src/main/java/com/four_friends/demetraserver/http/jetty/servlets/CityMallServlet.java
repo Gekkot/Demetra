@@ -11,6 +11,7 @@ import com.four_friends.demetraserver.entity.Owner;
 import com.four_friends.demetraserver.http.jetty.HttpHelper;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,9 @@ public class CityMallServlet extends CachingServlets{
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String[]> parameterMap = req.getParameterMap();
+        boolean hasLatKey = (parameterMap.containsKey("lat"));
+        boolean hasLongKey = (parameterMap.containsKey("long"));
         try {
             List<CityMall> allCityMalls = restarauntCache.getCityMalls();
             HttpHelper.answerEntities(resp, allCityMalls);
