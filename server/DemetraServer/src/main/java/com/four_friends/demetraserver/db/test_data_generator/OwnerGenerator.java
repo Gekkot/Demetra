@@ -30,6 +30,7 @@ public class OwnerGenerator {
         kfcOwner.setOwnerName("KFC");
         kfcOwner.setOwnerRestarauntName("KFC");
         kfcOwner.setUrl("http://kfc.ru");
+        kfcOwner.setLogoUrl("https://lh3.googleusercontent.com/7t2VkqpzA_J9t6Lr8okYwtIuKmO0S5FlsxMCS7z3GdN-0WNFAOjk1xKweaPbkFRbVmI=s180");
         return kfcOwner;
     }
 
@@ -38,6 +39,7 @@ public class OwnerGenerator {
         bkOwner.setOwnerName("Burger King");
         bkOwner.setOwnerRestarauntName("Burger King");
         bkOwner.setUrl("http://burgerking.ru");
+        bkOwner.setLogoUrl("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
         return bkOwner;
     }
     
@@ -46,6 +48,7 @@ public class OwnerGenerator {
         bsOwner.setOwnerName("BlackStar");
         bsOwner.setOwnerRestarauntName("BlackStar Burger");
         bsOwner.setUrl("https://blackstarburger.ru/");
+        bsOwner.setLogoUrl("https://blackstarburger.ru/local/templates/bsb/static/image/bsb-logo.png");
         return bsOwner;
     }
 

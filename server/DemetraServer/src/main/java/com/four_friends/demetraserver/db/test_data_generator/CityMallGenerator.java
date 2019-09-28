@@ -25,6 +25,8 @@ public class CityMallGenerator {
         cityMall.setCity("Санкт-Петербург");
         cityMall.setAddress("пр. просвещения 19");
         cityMall.setLocation("60.052388, 30.332191");
+        cityMall.setUrl("https://www.trk-nord.ru/");
+        cityMall.setImageUrl("https://aliton.ru/img/site-pix/nord-logo-240-120.jpg");
         try {
             cityMall.calClusterId();
         } catch (WrongLocationException ex) {
@@ -39,6 +41,8 @@ public class CityMallGenerator {
         cityMall.setCity("Санкт-Петербург");
         cityMall.setAddress("просп. Энгельса, 154");
         cityMall.setLocation("60.059050, 30.334377");
+        cityMall.setUrl("http://trk-canyon.ru/");
+        cityMall.setImageUrl("http://trk-canyon.ru/styles/images/image_logo.png");
         try {
             cityMall.calClusterId();
         } catch (WrongLocationException ex) {
@@ -53,6 +57,8 @@ public class CityMallGenerator {
         cityMall.setCity("Санкт-Петербург");
         cityMall.setAddress("Лиговский просп., 30");
         cityMall.setLocation("59.927235, 30.359542");
+        cityMall.setUrl("http://trk-canyon.ru/");
+        cityMall.setImageUrl("https://scontent.fhel5-1.fna.fbcdn.net/v/t1.0-9/33191566_1929017473809614_4388650247941783552_n.jpg?_nc_cat=107&_nc_oc=AQmLXNlmJcp40i2byBGVKqFGFU1FdajLTWoBfxe7g5ceLMDZnW1VQxNVYqXm1O7M2TU&_nc_ht=scontent.fhel5-1.fna&oh=3e326e1f1574aebecca5caa6e31efa6b&oe=5DEF0D2B");
         try {
             cityMall.calClusterId();
         } catch (WrongLocationException ex) {

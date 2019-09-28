@@ -5,6 +5,7 @@ import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoun
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -108,6 +109,10 @@ public class RestarauntCache {
     
     public List<FoodTag> getFoodTags() {
         return foodTagCache.values().stream().collect(Collectors.toList());
+    }
+    
+    public List<Actions> getActions(){
+        return dataProvider.getActions();
     }
 
 }

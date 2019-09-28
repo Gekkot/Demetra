@@ -1,9 +1,11 @@
 package com.four_friends.demetraserver.db.data_provider;
 
+import com.four_friends.demetraserver.db.data_provider.exception.ActionsNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -25,11 +27,13 @@ public interface IDataProvider {
     List<Owner> getOwners();
     List<Restaraunt> getRestaraunts();
     List<FoodTag> getFoodTags();
+    List<Actions> getActions();
     
     CityMall addCityMall(CityMall cityMall) throws CityMallNotFoundException;
     Owner addOwner(Owner owner) throws OwnerNotFoundException;
     Restaraunt addRestaraunt(Restaraunt restaraunt) throws RestarauntNotFoundException;
     FoodTag addFoodTag(FoodTag foodTag) throws FoodTagNotFoundException;
+    Actions addAction(Actions action) throws ActionsNotFoundException;
     
     
     List<CityMall> getCityMallWithClusterIndex(Long id);
