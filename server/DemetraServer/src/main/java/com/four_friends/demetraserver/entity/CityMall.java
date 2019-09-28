@@ -44,6 +44,9 @@ public class CityMall extends Entity{
     
     @DatabaseField
     private String url;
+    
+    @DatabaseField
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -144,4 +147,29 @@ public class CityMall extends Entity{
         this.clusterId = locationToClusterIndex;
         return locationToClusterIndex;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+    
 }

@@ -30,6 +30,9 @@ public class Restaraunt extends Entity {
 
     @DatabaseField
     private long ownerID;
+    
+    @DatabaseField
+    private String imageUrl;
 
     public Restaraunt() {
     }
@@ -98,5 +101,15 @@ public class Restaraunt extends Entity {
     public void setOwnerID(long ownerID) {
         this.ownerID = ownerID;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    
 
 }

@@ -15,6 +15,7 @@ public class RestarauntGenerator {
         restaraunt.setCity(cityMall.getCity());
         restaraunt.setAddress(cityMall.getAddress());
         restaraunt.setCityMollID(cityMall.getId());
+        restaraunt.setImageUrl(owner.getLogoUrl());
         return restaraunt;
     }
 }
