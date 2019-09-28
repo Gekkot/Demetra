@@ -32,8 +32,10 @@ class SideMenuViewController: UIViewController {
         view.addSubview(sideMenuTableView)
         sideMenuTableView.frame = view.bounds
         
+        let heightCoefficient = ContainerViewController().view.frame.height
+        
         sideMenuTableView.separatorStyle = .none
-        sideMenuTableView.rowHeight = 105
+        sideMenuTableView.rowHeight = heightCoefficient * 0.1
         sideMenuTableView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         sideMenuTableView.frame = view.frame.offsetBy(dx: 0, dy: imageInMenu.frame.height)
     }

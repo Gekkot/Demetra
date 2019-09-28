@@ -10,15 +10,12 @@ import UIKit
 
 class RestaurantCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBOutlet weak var restaurantImage: UIImageView!
+    @IBOutlet weak var restaurantLabel: UILabel!
+    
+    func printRestaurant(restaurant: Restaurant){
+        restaurantImage.image = restaurant.image
+        restaurantLabel.text = restaurant.name
     }
 
 }

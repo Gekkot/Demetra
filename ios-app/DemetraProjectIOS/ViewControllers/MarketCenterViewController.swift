@@ -13,7 +13,7 @@ protocol MarketCenterViewControllerDelegate {
     func toggleMenu()
 }
 
-var chooseMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "basketball"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0)
+var chooseMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "newPlaceIconMenu"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0)
 
 class MarketCenterViewController: UIViewController {
 
