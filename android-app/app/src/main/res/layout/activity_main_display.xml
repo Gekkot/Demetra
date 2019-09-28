@@ -40,7 +40,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <FrameLayout
-            android:id="@+id/drawler_continer"
+            android:id="@+id/drawer_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>

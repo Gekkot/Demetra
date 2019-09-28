@@ -31,6 +31,10 @@
         <activity android:name=".MainDisplayActivity">
 
         </activity>
+
+        <activity android:name=".RestarantListActivity">
+
+        </activity>
     </application>
 
 </manifest>
