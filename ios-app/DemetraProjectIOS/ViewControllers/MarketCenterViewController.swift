@@ -15,10 +15,12 @@ protocol MarketCenterViewControllerDelegate {
 
 class MarketCenterViewController: UIViewController {
 
-    var marketCenters: [MarketCenter]!
+    var countOfMarketCenter = 0
+    
+    var marketCenters: [MarketCenter] = []
     var delegate: MarketCenterViewControllerDelegate?
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var marketCenterTableView: MarketCenterList!
+    @IBOutlet weak var marketCenterTable: UITableView!
     
     @IBAction func MenuToggleAction(_ sender: UIButton) {
         delegate?.toggleMenu()
@@ -26,15 +28,17 @@ class MarketCenterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createMarketCenterArray()
+        sleep(1)
+        print(countOfMarketCenter)
+        //while marketCenters.count != countOfMarketCenter{
+            self.marketCenterTable.delegate = self
+            self.marketCenterTable.dataSource = self
+       // }
         let camera = GMSCameraPosition.camera(withLatitude: 59.93, longitude: 30.3, zoom: 14.0)
         mapView.camera = camera
         self.showMarketCenter(position: mapView.camera.target)
-        
-        createMarketCenterArray()
-        while marketCenters.isEmpty{
-            self.marketCenterTableView.delegate = self
-            self.marketCenterTableView.dataSource = self
-        }
     }
     
     func showMarketCenter(position: CLLocationCoordinate2D){
@@ -50,10 +54,15 @@ class MarketCenterViewController: UIViewController {
             do{
                 let json = try JSONSerialization.jsonObject(with: dataResponse, options: []) as! Dictionary<String, Any>
                 let jsonArray = json["data"] as! [[String: Any]]
+                self.countOfMarketCenter = jsonArray.count
                 for i in 0..<jsonArray.count{
                     guard let id = jsonArray[i]["id"] as? Int else {print("Invalid \(i) id"); return}
                     guard let name = jsonArray[i]["name"] as? String else {print("Invalid \(i) name"); return}
-                    guard let restaurantIds = jsonArray[i]["restaurantIds"] as? [Int] else {print("Invalid \(i) restaurantIds"); return}
+                    guard let restaurantIdsArray = jsonArray[i]["restarauntIds"] as? [Int] else {print("Invalid \(i) restaurantIds"); return}
+                    var restaurantIds: [Int] = []
+                    for i in 0..<restaurantIdsArray.count{
+                        restaurantIds.append(restaurantIdsArray[i])
+                    }
                     guard let city = jsonArray[i]["city"] as? String else {print("Invalid \(i) city"); return}
                     guard let address = jsonArray[i]["address"] as? String else {print("Invalid \(i) address"); return}
                     guard let clusterId = jsonArray[i]["clusterId"] as? Int else {print("Invalid \(i) clusterId"); return}
@@ -61,7 +70,7 @@ class MarketCenterViewController: UIViewController {
                     guard let latitude = jsonArray[i]["latitude"] as? Double else {print("Invalid \(i) latitude"); return}
                     
                     let image: UIImage!
-                    image = #imageLiteral(resourceName: "newPlaceIconMenu")
+                    image = #imageLiteral(resourceName: "recommendationIconMenu")
                     
                     let marketCenter = MarketCenter(image: image, id: id, name: name, restaurantsIds: restaurantIds, city: city, address: address, clusterId: clusterId, longitude: longitude, latitude: latitude)
                     self.marketCenters.append(marketCenter)
@@ -74,11 +83,15 @@ class MarketCenterViewController: UIViewController {
 
 extension MarketCenterViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return marketCenters.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let marketCenter = marketCenters[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MarketCenterCell") as! MarketCenterCell
+        cell.printMarketCenter(marketCenter: marketCenter)
+        return cell
     }
     
     
