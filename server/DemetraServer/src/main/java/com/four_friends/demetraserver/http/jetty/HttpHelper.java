@@ -48,7 +48,7 @@ public class HttpHelper {
 
     public static void answerEntity(HttpServletResponse response, Entity entity) throws UnsupportedEncodingException, IOException {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("result", "error");
+        jsonObject.addProperty("result", "ok");
         Gson gson = new Gson();
         JsonElement jsonElement = gson.toJsonTree(entity);
         jsonObject.add("data", jsonElement);
@@ -62,7 +62,7 @@ public class HttpHelper {
 
     public static void answerEntities(HttpServletResponse response, List entities) throws UnsupportedEncodingException, IOException {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("result", "error");
+        jsonObject.addProperty("result", "ok");
         Gson gson = new Gson();
         JsonElement jsonElement = gson.toJsonTree(entities);
         jsonObject.add("data", jsonElement);
