@@ -15,6 +15,8 @@ public class MainSinglet {
     private JSONArray mJSONArrayTrk;
     private LatLng mCurrentLatLon;
     private JSONArray mJSONArraySelectedTrkRestarant;
+    private JSONObject mSelectedRestaurantJSONObject;
+    public static final String SERVER_ADDR = "91.218.249.70:4004";
 
     private MainSinglet(){
         
@@ -44,6 +46,17 @@ public class MainSinglet {
         try {
             JSONObject obj = mJSONArrayTrk.getJSONObject(position);
             return obj.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "null";
+    }
+
+    public String getIconTrkUrl(int position)
+    {
+        try {
+            JSONObject obj = mJSONArrayTrk.getJSONObject(position);
+            return obj.getString("logoUrl");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -89,5 +102,18 @@ public class MainSinglet {
 
     public JSONArray getSelectedTrkRestarant(){
         return mJSONArraySelectedTrkRestarant;
+    }
+
+    public void selectRestaurant(int position){
+        try {
+            mSelectedRestaurantJSONObject = mJSONArraySelectedTrkRestarant.getJSONObject(position);
+      } catch (JSONException e) {
+            e.printStackTrace();
+            mSelectedRestaurantJSONObject = null;
+        }
+    }
+
+    public JSONObject getSelectedRestaurant(){
+        return mSelectedRestaurantJSONObject;
     }
 }

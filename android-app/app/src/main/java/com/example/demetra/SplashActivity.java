@@ -12,7 +12,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, MainDisplayActivity.class);
-        //Intent intent = new Intent(this, RestarantListActivity.class);
+        //Intent intent = new Intent(this, RestaurantListActivity.class);
         startActivity(intent);
         finish();
     }
