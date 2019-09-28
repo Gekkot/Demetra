@@ -7,8 +7,10 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -20,7 +22,7 @@ public class CityMall extends Entity{
     @DatabaseField
     private String name;
     
-    private List<Restaraunt> restarauntList = new ArrayList<>();
+    private Set<Restaraunt> restarauntList = new HashSet<>();
     
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Long[] restarauntIds = new Long[]{};
@@ -117,7 +119,8 @@ public class CityMall extends Entity{
     };
     
     public void addRestaraunt(Restaraunt restaraunt){
-        List<Long> idsList = new ArrayList<>();
+        restarauntList.add(restaraunt);
+        Set<Long> idsList = new HashSet<>();
         Collections.addAll(idsList, restarauntIds);
         idsList.add(restaraunt.getId());
         this.restarauntIds = idsList.toArray(new Long[0]);
