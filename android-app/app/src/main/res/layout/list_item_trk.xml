@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/icon_trk"
-        android:layout_width="20mm"
+        android:layout_width="21mm"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

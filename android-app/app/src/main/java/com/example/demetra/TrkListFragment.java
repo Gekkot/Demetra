@@ -107,6 +107,7 @@ public class TrkListFragment extends Fragment {
             }
             else {
                 Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
+                MainSinglet.get().selectTrk(this.getPosition());
                 Intent intent = new Intent(getActivity(), RestarantListActivity.class);
                 startActivity(intent);
             }
@@ -144,10 +145,6 @@ public class TrkListFragment extends Fragment {
         mTrkListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
-
-        //SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
-        //       .findFragmentById(R.id.map_container);
-        //mapFragment.getMapAsync(this);
         return v;
     }
 
