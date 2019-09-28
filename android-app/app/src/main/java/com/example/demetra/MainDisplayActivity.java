@@ -39,6 +39,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -274,6 +276,12 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
     int setIdContentView() {
         return R.layout.activity_main_display;
     }
+
+    @Override
+    ViewGroup getViewGroupForToolbar() {
+        return findViewById(R.id.main_linear_layout);
+    }
+
 
     @Override
     public void OnMapButtonClick(View view, LatLng latLng, String trkName) {
