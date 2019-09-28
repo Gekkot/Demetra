@@ -1,5 +1,6 @@
 package com.four_friends.demetraserver.db.sqlite;
 
+import com.four_friends.demetraserver.dao.ActionsDao;
 import com.four_friends.demetraserver.dao.CityMallDao;
 import com.four_friends.demetraserver.dao.FoodTagDao;
 import com.four_friends.demetraserver.dao.OwnerDao;
@@ -9,6 +10,7 @@ import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoun
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -30,6 +32,7 @@ public class SqliteDataProvider implements IDataProvider{
     private OwnerDao ownerDAO = null;
     private RestarauntDao restarauntDAO = null;
     private FoodTagDao foodTagDAO = null;
+    private ActionsDao actionsDAO = null;
 
     public SqliteDataProvider(ConnectionSource connectionSource) {
         this.connectionSource = connectionSource;
@@ -46,6 +49,7 @@ public class SqliteDataProvider implements IDataProvider{
         ownerDAO = new OwnerDao(connectionSource);
         restarauntDAO = new RestarauntDao(connectionSource);
         foodTagDAO = new FoodTagDao(connectionSource);
+        actionsDAO = new ActionsDao(connectionSource);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class SqliteDataProvider implements IDataProvider{
         }
         return emptyList;
     }
-
+  
     @Override
     public CityMall getCityMall(Long id) throws CityMallNotFoundException {
         CityMallNotFoundException cityMallNotFoundException = new CityMallNotFoundException(id);
@@ -235,6 +239,21 @@ public class SqliteDataProvider implements IDataProvider{
             }
         }
         throw new RestarauntNotFoundException();
+    }
+
+    @Override
+    public List<Actions> getActions() {
+        List<Actions> emptyActionsList = new ArrayList<>();
+        if (actionsDAO != null) {
+            try {
+                return actionsDAO.getAll();
+            } catch (SQLException ex) {
+                Logger.getLogger(SqliteDataProvider.class.getName()).log(Level.SEVERE, null, ex);
+                return emptyActionsList;
+            }
+        }
+        return emptyActionsList;
+
     }
 
 }
