@@ -5,6 +5,7 @@
  */
 package com.four_friends.demetraserver.http.jetty.servlets;
 
+import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.db.test_data_generator.CityMallGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.FoodTagGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.RestarauntGenerator;
@@ -21,7 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gekko
  */
-public class RestarauntServlet extends HttpServlet{
+public class RestarauntServlet extends CachingServlets{
+
+    public RestarauntServlet(RestarauntCache restarauntCache) {
+        super(restarauntCache);
+    }
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
