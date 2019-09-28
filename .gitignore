@@ -25,3 +25,6 @@ hs_err_pid*
 \.directory
 /server/DemetraServer/target/
 server/DemetraServer/deploy-server-vk\.sh
+
+server/DemetraServer/persephone\.db
+/server/DemetraServer/nbproject/

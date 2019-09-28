@@ -29,6 +29,7 @@ public class RestarauntCache {
 
     public RestarauntCache(IDataProvider dataProvider) {
         this.dataProvider = dataProvider;
+        initData();
     }
     
        private void initData() {

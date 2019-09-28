@@ -5,9 +5,9 @@
  */
 package com.four_friends.demetraserver.http.jetty.servlets;
 
+import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.http.jetty.HttpHelper;
 import java.io.IOException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gekko
  */
-public class RequestRestarauntNearestServlet extends HttpServlet{
+public class RequestRestarauntNearestServlet extends CachingServlets{
+
+    public RequestRestarauntNearestServlet(RestarauntCache restarauntCache) {
+        super(restarauntCache);
+    }
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

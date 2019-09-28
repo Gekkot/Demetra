@@ -1,7 +1,11 @@
 package com.four_friends.demetraserver.entity;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -18,6 +22,12 @@ public class Owner extends Entity{
 
     @DatabaseField
     private String url;
+    
+    @DatabaseField
+    private String logoUrl;
+    
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private Long[] foodTagIds = new Long[]{};
 
     public String getOwnerName() {
         return ownerName;
@@ -41,6 +51,13 @@ public class Owner extends Entity{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    
+     public void addFoodTag(FoodTag foodTag) {
+        List<Long> idsList = new ArrayList<>();
+        Collections.addAll(idsList, foodTagIds);
+        idsList.add(foodTag.getId());
+        this.foodTagIds = idsList.toArray(new Long[0]);
     }
 
 }

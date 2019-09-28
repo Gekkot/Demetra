@@ -25,7 +25,7 @@ public class HttpHelper {
         jsonObject.addProperty("result", "error");
         jsonObject.addProperty("message", exceptionMessage);
         jsonObject.add("data", new JsonObject());
-        String reply = jsonObject.getAsString();
+        String reply = jsonObject.toString();
         response.getOutputStream().write(reply.getBytes("UTF-8"));
         response.setContentType("application/json; charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -38,7 +38,7 @@ public class HttpHelper {
         jsonObject.addProperty("result", "error");
         jsonObject.addProperty("message", ex.getMessage());
         jsonObject.add("data", new JsonObject());
-        String reply = jsonObject.getAsString();
+        String reply = jsonObject.toString();
         response.getOutputStream().write(reply.getBytes("UTF-8"));
         response.setContentType("application/json; charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -52,7 +52,7 @@ public class HttpHelper {
         Gson gson = new Gson();
         JsonElement jsonElement = gson.toJsonTree(entity);
         jsonObject.add("data", jsonElement);
-        String reply = jsonObject.getAsString();
+        String reply = jsonObject.toString();
         response.getOutputStream().write(reply.getBytes("UTF-8"));
         response.setContentType("application/json; charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");

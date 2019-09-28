@@ -10,6 +10,14 @@ import java.util.List;
  * @author gekko
  */
 public class MenuPosition extends Entity {
+
+    public MenuPosition() {
+    }
+
+    public MenuPosition(String name) {
+        this.name = name;
+    }
+    
     
     @DatabaseField
     String name;
@@ -17,9 +25,50 @@ public class MenuPosition extends Entity {
     @DatabaseField
     String description;
     
+    @DatabaseField
+    float price;
+    
+    FoodCategory foodCategory;
+    
     List<Topping> toppings  = new ArrayList<>();
     
     @DatabaseField
-    Long[] toppingsIds;
+    Long[] toppingsIds = new Long[]{};
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
+    }
+
+    public void setFoodCategory(FoodCategory foodCategory) {
+        this.foodCategory = foodCategory;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+    
+    
+    
+    
     
 }
