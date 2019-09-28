@@ -21,6 +21,9 @@ public class Restaraunt extends Entity {
 
     @DatabaseField
     private long latitude;
+    
+    @DatabaseField
+    private String  description;
 
     @DatabaseField
     private long longitude;
@@ -109,6 +112,16 @@ public class Restaraunt extends Entity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
     
     
 
