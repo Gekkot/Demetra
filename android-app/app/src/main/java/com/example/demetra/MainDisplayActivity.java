@@ -15,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -38,16 +39,23 @@ import androidx.fragment.app.FragmentManager;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class MainDisplayActivity extends MainDrawerActivity implements OnMapReadyCallback, LocationListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainDisplayActivity extends MainDrawerActivity implements OnMapReadyCallback, LocationListener, TrkListFragment.OnMapButtonListener {
 
 
     private GoogleMap mMap;
     private TrkListFragment mTrkListFragment;
+    private LatLng mSelectedTrkLatLng;
+    private String mSelectedTrkString;
     private static final int REQ_LOCATION_PERMISSION = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //setContentView(R.layout.activity_main_display);
 /*        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +83,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
         if(fragment == null){
             mTrkListFragment = new TrkListFragment();
             fm.beginTransaction().add(R.id.list_container, mTrkListFragment).commit();
+            mTrkListFragment.setOnMapButtonListener(this);
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -141,25 +150,92 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
         return intLatitude * 10000 + intLongitude;
     }
 
+    private void removeAllMarkers(){
+        if(mMap != null) {
+            mMap.clear();
+        }
+    }
+    private void updateMapMarkers(){
+        if(mMap != null) {
+            LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
+            if(latLng != null) {
+                mMap.addMarker(new MarkerOptions().position(latLng).title(this.getResources().getString(R.string.you_there)));
+            }
+            if(mSelectedTrkLatLng != null){
+                mMap.addMarker(new MarkerOptions().position(mSelectedTrkLatLng).title(mSelectedTrkString));
+            }
+        }
+    }
+
+    private void moveCameraOnUser(){
+        if(mMap != null) {
+            LatLng myLatLng = MainSinglet.get().getMyCurrentLatLng();
+            if(myLatLng == null) return;
+
+            if(mSelectedTrkLatLng == null) {
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(myLatLng));
+                CameraPosition.Builder camPosBuilder = new CameraPosition.Builder()
+                        .bearing(0)
+                        .tilt(30)
+                        .target(myLatLng)
+                        .zoom(12);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(camPosBuilder.build());
+                mMap.animateCamera(cameraUpdate);
+            }
+            else
+            {
+                LatLngBounds latLngBounds;
+                double leftBotLat;
+                double leftBotLng;
+                double rightTopLat;
+                double rightTopLng;
+                double latOffset;
+                double lngOffset;
+
+                if(myLatLng.latitude < mSelectedTrkLatLng.latitude){
+                    leftBotLat = myLatLng.latitude;
+                    rightTopLat = mSelectedTrkLatLng.latitude;
+                }else {
+                    rightTopLat = myLatLng.latitude;
+                    leftBotLat = mSelectedTrkLatLng.latitude;
+                }
+
+                if(myLatLng.longitude < mSelectedTrkLatLng.longitude){
+                    leftBotLng = myLatLng.longitude;
+                    rightTopLng = mSelectedTrkLatLng.longitude;
+                }else {
+                    rightTopLng = myLatLng.longitude;
+                    leftBotLng = mSelectedTrkLatLng.longitude;
+                }
+
+                latOffset = (rightTopLat - leftBotLat) * 0.2;
+                lngOffset = (rightTopLng - leftBotLng) * 0.2;
+
+                rightTopLat += latOffset;
+                leftBotLat -= latOffset;
+                rightTopLng += lngOffset;
+                leftBotLng -= lngOffset;
+
+                //CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(camPosBuilder.build());
+                //mMap.animateCamera(cameraUpdate);
+                latLngBounds = new LatLngBounds(new LatLng(leftBotLat, leftBotLng), new LatLng(rightTopLat, rightTopLng));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
+            }
+        }
+    }
+
+
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(getApplicationContext(), "onLocationChanged claster: " + getClasterIndex(location.getLatitude(), location.getLongitude()), Toast.LENGTH_LONG).show();
-        mTrkListFragment.onUpdateLocation(location.getLatitude(), location.getLongitude());
-        if(mMap != null) {
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(location.getLatitude(),  location.getLongitude());
-            mMap.clear();
-            mMap.addMarker(new MarkerOptions().position(sydney).title("You"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location.getLatitude(), location.getLongitude()))
-                    .zoom(12)
-                    .bearing(0)
-                    .tilt(30)
-                    .build();
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-            mMap.animateCamera(cameraUpdate);
-        }
+        LatLng latLng = new LatLng(location.getLatitude(),  location.getLongitude());
+        MainSinglet.get().setMyLatLng(latLng);
+        if(mTrkListFragment != null)
+            mTrkListFragment.onUpdateLocation(location.getLatitude(), location.getLongitude());
+        removeAllMarkers();
+        updateMapMarkers();
+        moveCameraOnUser();
     }
 
     @Override
@@ -180,7 +256,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
 
     @Override
     int idDrawerContainer() {
-        return R.id.drawler_continer;
+        return R.id.drawer_container;
     }
 
     @Override
@@ -191,5 +267,14 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
     @Override
     int setIdContentView() {
         return R.layout.activity_main_display;
+    }
+
+    @Override
+    public void OnMapButtonClick(View view, LatLng latLng, String trkName) {
+        mSelectedTrkLatLng = latLng;
+        mSelectedTrkString = trkName;
+        removeAllMarkers();
+        updateMapMarkers();
+        moveCameraOnUser();
     }
 }
