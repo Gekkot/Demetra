@@ -2,6 +2,7 @@ package com.four_friends.demetraserver.db.sqlite;
 
 import com.four_friends.demetraserver.db.exception.DBConnectException;
 import com.four_friends.demetraserver.db.exception.TableCreateException;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -63,6 +64,7 @@ public class SqliteDBConnect {
         createTable(connectionSource, CityMall.class);
         createTable(connectionSource, Restaraunt.class);
         createTable(connectionSource, FoodTag.class);
+        createTable(connectionSource, Actions.class);
     }
     
     void createTable(ConnectionSource connectionSource,Class tableClass) throws TableCreateException{

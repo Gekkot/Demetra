@@ -6,6 +6,7 @@ import com.four_friends.demetraserver.dao.FoodTagDao;
 import com.four_friends.demetraserver.dao.OwnerDao;
 import com.four_friends.demetraserver.dao.RestarauntDao;
 import com.four_friends.demetraserver.db.data_provider.IDataProvider;
+import com.four_friends.demetraserver.db.data_provider.exception.ActionsNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
@@ -254,6 +255,19 @@ public class SqliteDataProvider implements IDataProvider{
         }
         return emptyActionsList;
 
+    }
+
+    @Override
+    public Actions addAction(Actions action) throws ActionsNotFoundException {
+        if (actionsDAO != null) {
+            try {
+                return actionsDAO.createAction(action);
+            } catch (SQLException ex) {
+                Logger.getLogger(SqliteDataProvider.class.getName()).log(Level.SEVERE, null, ex);
+                throw new ActionsNotFoundException();
+            }
+        }
+        throw new ActionsNotFoundException();
     }
 
 }
