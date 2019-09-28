@@ -6,8 +6,8 @@
 package com.four_friends.demetraserver.http.jetty.servlets;
 
 import com.four_friends.demetraserver.cache.RestarauntCache;
-import com.four_friends.demetraserver.db.test_data_generator.FoodTagGenerator;
 import com.four_friends.demetraserver.entity.FoodTag;
+import com.four_friends.demetraserver.entity.Owner;
 import com.four_friends.demetraserver.http.jetty.HttpHelper;
 import java.io.IOException;
 import java.util.List;
@@ -19,21 +19,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gekko
  */
-public class FoodTagsServlet extends CachingServlets {
+public class OwnersServlets extends CachingServlets {
 
-    public FoodTagsServlet(RestarauntCache restarauntCache) {
+    public OwnersServlets(RestarauntCache restarauntCache) {
         super(restarauntCache);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
-        List<FoodTag> allFoodTags = restarauntCache.getFoodTags();
-        HttpHelper.answerEntities(resp, allFoodTags);
-        }catch(Exception e){
+        try {
+            List<Owner> allOwners = restarauntCache.getOwners();
+            HttpHelper.answerEntities(resp, allOwners);
+        } catch (Exception e) {
             HttpHelper.answerError(resp, e);
         }
     }
-    
-    
+
 }

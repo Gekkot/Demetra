@@ -7,6 +7,7 @@ package com.four_friends.demetraserver.http.jetty;
 
 import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.http.jetty.servlets.FoodTagsServlet;
+import com.four_friends.demetraserver.http.jetty.servlets.OwnersServlets;
 import com.four_friends.demetraserver.http.jetty.servlets.RequestRestarauntNearestServlet;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
@@ -54,6 +55,7 @@ public class OwnHttpServer {
         
         context.addServlet(new ServletHolder(new RequestRestarauntNearestServlet(restarauntCache)), "/nearest");
         context.addServlet(new ServletHolder(new FoodTagsServlet(restarauntCache)), "/food_tags");
+        context.addServlet(new ServletHolder(new OwnersServlets(restarauntCache)), "/owners");
         server.setHandler(context);
         
         server.start();

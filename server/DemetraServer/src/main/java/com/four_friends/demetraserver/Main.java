@@ -114,6 +114,7 @@ public class Main {
             sqliteDBConnect.createDB();
             ConnectionSource connectionSource = sqliteDBConnect.createConnectionSource();
             IDataProvider dataProvider = new SqliteDataProvider(connectionSource);
+            initData(dataProvider);
             RestarauntCache restarauntCache = new RestarauntCache(dataProvider);
             OwnHttpServer ownHttpServer = new OwnHttpServer(restarauntCache);
             ownHttpServer.start();

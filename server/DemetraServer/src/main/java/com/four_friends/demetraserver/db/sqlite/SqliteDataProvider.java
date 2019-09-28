@@ -53,8 +53,12 @@ public class SqliteDataProvider implements IDataProvider{
         List<CityMall> emptyList = new ArrayList<>();
         if (cityMallDAO != null) {
             try {
-                return cityMallDAO.getAll();
+                List<CityMall> all = cityMallDAO.getAll();
+                return all;
             } catch (SQLException ex) {
+                return emptyList;
+            } catch ( Exception ex){
+                ex.printStackTrace();
                 return emptyList;
             }
         }
