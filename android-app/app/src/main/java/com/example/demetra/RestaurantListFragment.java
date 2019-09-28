@@ -56,30 +56,47 @@ public class RestaurantListFragment extends Fragment {
         public void bind(int position)
         {
             JSONArray jsonArray = MainSinglet.get().getSelectedTrkRestarant();
-            String name;
-            String urlIcon;
+            String name = "name";
+            String urlIcon = null;
+            String description = "null";
             if(jsonArray == null) return;
 
             try {
                 mJSONObject = jsonArray.getJSONObject(position);
                 name = mJSONObject.getString("name");
-                mRestarantId = mJSONObject.getLong("id");
-                //urlIcon = mJSONObject.getJSONObject("owner").getString("logoUrl");
             } catch (JSONException e) {
                 e.printStackTrace();
                 ((TextView) this.itemView.findViewById(R.id.restaurant_name)).setText("invalid position");
                 return;
             }
+            if(mJSONObject != null) {
+
+                try {
+                    mRestarantId = mJSONObject.getLong("id");
+                } catch (JSONException e) {
+                }
+                try {
+                    urlIcon = mJSONObject.getString("imageUrl");
+                } catch (JSONException e) {
+                }
+
+                try {
+                    description = mJSONObject.getString("descriptor");
+                } catch (JSONException e) {
+                }
+            }
 
             TextView tv= (TextView) this.itemView.findViewById(R.id.restaurant_name);
             tv.setText(name);
             tv = (TextView) this.itemView.findViewById(R.id.restaurant_description);
-            tv.setText("restaurant description restaurant description restaurant description restaurant description restaurant description ");
+            tv.setText(description);
             ImageView iv = this.itemView.findViewById(R.id.icon_restaurant);
             iv.setImageResource(R.mipmap.ic_launcher);
+            if(urlIcon != null)
             new DownloadImageTask(iv)
-                    //.execute(MainSinglet.get().getIconTrkUrl(urlIcon));
-                    .execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    .execute(urlIcon);
+                    //.execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    //.execute("https://aliton.ru/img/site-pix/nord-logo-240-120.jpg");
             this.itemView.setOnClickListener(this);
         }
 

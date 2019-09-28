@@ -60,8 +60,10 @@ public class TrkListFragment extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
-                urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_malls?lat="+40+"&long="+60;
+                //String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
+                latitude = 60.05; longitude=30.33;
+                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_mall?lat="+latitude+"&long="+longitude;
+                //urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_malls?lat="+40+"&long="+60;
                 Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
                 Log.i(TAG, s);
@@ -76,8 +78,14 @@ public class TrkListFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            MainSinglet.get().onNewListTrks(s);
-            updateUI();
+            if(s!= null) {
+                MainSinglet.get().onNewListTrks(s);
+                updateUI();
+            }
+            else {
+                LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
+                onUpdateLocation(latLng.latitude, latLng.longitude);
+            }
         }
     };
 
@@ -95,8 +103,8 @@ public class TrkListFragment extends Fragment {
         {
             ImageView iv = (ImageView) this.itemView.findViewById(R.id.icon_trk);
             new DownloadImageTask(iv)
-                    //.execute(MainSinglet.get().getIconTrkUrl(position));
-                    .execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    .execute(MainSinglet.get().getIconTrkUrl(position));
+                    //.execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
             mTrkName = this.itemView.findViewById(R.id.trk_name);
             mTrkName.setText(MainSinglet.get().getNameTrk(position));
             mTrkDistance =  this.itemView.findViewById(R.id.trk_distance);

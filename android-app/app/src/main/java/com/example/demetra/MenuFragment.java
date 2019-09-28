@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -18,6 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +32,7 @@ public class MenuFragment extends Fragment {
     private RecyclerView mMenuListRecyclerView;
     private MenuAdapter mMenuAdapter;
     JSONArray mMenuJSONArray;
+    Button mToPayButton;
     public MenuFragment(JSONArray menu){
         super();
         mMenuJSONArray = menu;
@@ -37,10 +42,11 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
-        View v = inflater.inflate(R.layout.solo_recycler_view, container, false);
+        View v = inflater.inflate(R.layout.basket_layout, container, false);
         //View v = inflater.inflate(R.layout.tab_host_eample, container, false);
         mMenuListRecyclerView = v.findViewById(R.id.recycler_view);
         mMenuListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mToPayButton =v.findViewById(R.id.to_pay_button);
 
         updateUI();
         return v;
@@ -94,6 +100,7 @@ public class MenuFragment extends Fragment {
                         mCountTextView.setText("" + count);
                         BasketSinglet.get().onChangeCountMenuposition(mJSONObject, count);
                         ((MainDrawerActivity) getActivity()).onUpdateBasket();
+                        setVisibilityToPayButton();
                     }
                 }
             });
@@ -106,6 +113,7 @@ public class MenuFragment extends Fragment {
                     mCountTextView.setText(""+count);
                     BasketSinglet.get().onChangeCountMenuposition(mJSONObject, count);
                     ((MainDrawerActivity) getActivity()).onUpdateBasket();
+                    setVisibilityToPayButton();
                 }
             });
 
@@ -147,6 +155,14 @@ public class MenuFragment extends Fragment {
             Log.i(TAG, "updateUI isAdded");
             mMenuAdapter = new MenuAdapter();
             mMenuListRecyclerView.setAdapter(mMenuAdapter);
+            setVisibilityToPayButton();
+        }
+    }
+    private void setVisibilityToPayButton(){
+        if(BasketSinglet.get().isEmpty()){
+            mToPayButton.setVisibility(View.INVISIBLE);
+        }else{
+            mToPayButton.setVisibility(View.VISIBLE);
         }
     }
 }
