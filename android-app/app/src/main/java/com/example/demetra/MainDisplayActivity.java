@@ -13,6 +13,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -159,10 +161,14 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
         if(mMap != null) {
             LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
             if(latLng != null) {
-                mMap.addMarker(new MarkerOptions().position(latLng).title(this.getResources().getString(R.string.you_there)));
+                MarkerOptions marker = new MarkerOptions().position(latLng).title(this.getResources().getString(R.string.you_there));
+                //marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                mMap.addMarker(marker);
             }
             if(mSelectedTrkLatLng != null){
-                mMap.addMarker(new MarkerOptions().position(mSelectedTrkLatLng).title(mSelectedTrkString));
+                MarkerOptions marker = new MarkerOptions().position(mSelectedTrkLatLng).title(mSelectedTrkString);
+                marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.show_in_map_button));
+                mMap.addMarker(marker);
             }
         }
     }

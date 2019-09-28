@@ -35,6 +35,10 @@
         <activity android:name=".RestarantListActivity">
 
         </activity>
+
+        <activity android:name=".MenuActivity">
+
+        </activity>
     </application>
 
 </manifest>
