@@ -33,13 +33,15 @@ public class MenuAnswer {
          JsonObject categoryJsonObject = new JsonObject();
          categoryJsonObject.addProperty("name", foodCategory.name);
          categoryJsonObject.addProperty("description", foodCategory.description);
+         categoryJsonObject.addProperty("id", foodCategory.getId());
          List<MenuPosition> menuPositionsOfCategory = getMenuPositionsOfCategory(menuPositions, foodCategory);
          JsonArray jsonArray = new JsonArray();
-         for(MenuPosition menuPosition: menuPositions){
+         for(MenuPosition menuPosition: menuPositionsOfCategory){
              JsonObject jsonObject = new JsonObject();
              jsonObject.addProperty("name", menuPosition.getName());
              jsonObject.addProperty("description", menuPosition.getDescription());
              jsonObject.addProperty("price", menuPosition.getPrice());
+             jsonObject.addProperty("id", menuPosition.getId());
              jsonArray.add(jsonObject);
          }
          categoryJsonObject.getAsJsonObject().add("menuPositions", jsonArray);
