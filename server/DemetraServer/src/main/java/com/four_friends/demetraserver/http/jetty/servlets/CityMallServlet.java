@@ -7,14 +7,19 @@ package com.four_friends.demetraserver.http.jetty.servlets;
 
 import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoundException;
+import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.Owner;
+import com.four_friends.demetraserver.entity.Restaraunt;
 import com.four_friends.demetraserver.http.jetty.HttpHelper;
 import com.four_friends.demetraserver.util.LocationHelper;
 import com.four_friends.demetraserver.util.exception.WrongLocationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +35,17 @@ public class CityMallServlet extends CachingServlets{
         super(restarauntCache);
     }
     
+    private final static String LAT_KEY = "lat";
+    private final static String LONG_KEY = "long";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String[]> parameterMap = req.getParameterMap();
-        boolean hasLatKey = (parameterMap.containsKey("lat"));
-        boolean hasLongKey = (parameterMap.containsKey("long"));
+        boolean hasLatKey = (parameterMap.containsKey(LAT_KEY));
+        boolean hasLongKey = (parameterMap.containsKey(LONG_KEY));
         if (hasLatKey && hasLongKey) {
             try {
-                String latString = parameterMap.get("lat")[0];
-                String longString = parameterMap.get("long")[0];
+                String latString = parameterMap.get(LAT_KEY)[0];
+                String longString = parameterMap.get(LONG_KEY)[0];
                 double latValue = Double.parseDouble(latString);
                 double longValue = Double.parseDouble(longString);
                 long locationToClusterIndex = LocationHelper.LocationToClusterIndex(latValue, longValue);
@@ -46,7 +53,23 @@ public class CityMallServlet extends CachingServlets{
                 List<CityMall> collect = restarauntCache.getCityMalls().stream().filter((cityMall) -> {
                     return cityMall.getClusterId() == locationToClusterIndex;
                 }).collect(Collectors.toList());
-                HttpHelper.answerEntities(resp, collect);
+                List<CityMall> copy = new ArrayList<>();
+                for(CityMall cityMall : collect){
+                    Long[] restarauntIds = cityMall.getRestarauntIds();
+                    for(long restarauntId : restarauntIds){
+                        try {
+                            System.out.println("try found restaraunt with id "+restarauntId);
+                            Restaraunt restaraunt = restarauntCache.getRestaraunt(restarauntId);
+                            cityMall.addRestaraunt(restaraunt);
+                            System.out.println("restoraunt add "+restarauntId);
+                        } catch (RestarauntNotFoundException ex) {
+                            Logger.getLogger(CityMallServlet.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("error on finding restaraunt "+restarauntId);
+                        }
+                    }
+                    copy.add(cityMall);
+                }
+                HttpHelper.answerEntities(resp, copy);
                 return;
 
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException | WrongLocationException ex) {
