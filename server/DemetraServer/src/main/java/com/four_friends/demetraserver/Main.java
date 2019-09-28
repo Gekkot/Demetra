@@ -2,6 +2,7 @@ package com.four_friends.demetraserver;
 
 import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.db.data_provider.IDataProvider;
+import com.four_friends.demetraserver.db.data_provider.exception.ActionsNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
@@ -12,6 +13,7 @@ import com.four_friends.demetraserver.db.test_data_generator.CityMallGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.FoodTagGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.OwnerGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.RestarauntGenerator;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -97,6 +99,13 @@ public class Main {
             nordCityMall = dataProvider.addCityMall(nordCityMall);
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);
             galeryCityMall = dataProvider.addCityMall(galeryCityMall);
+            
+            Actions actions  = new Actions();
+            actions.setShortDescription("Распродажа бургеров");
+            actions.setStartDate("25.09.2019");
+            actions.setEndDate("30.09.2019");
+            dataProvider.addAction(actions);
+
         } catch (OwnerNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RestarauntNotFoundException ex) {
@@ -105,7 +114,9 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FoodTagNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (ActionsNotFoundException ex) {
+              Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+          }
         
     }
     public static void main(String[] args) {
