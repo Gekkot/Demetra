@@ -15,4 +15,22 @@ public class FoodCategory extends Entity {
     
     @DatabaseField
     String description;
+
+    public FoodCategory() {
+        this("","");
+    }
+
+    public FoodCategory(String name) {
+        this(name, "");
+    }
+
+    public FoodCategory(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+    
+    
+    
+    
+    
 }
