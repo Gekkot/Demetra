@@ -80,7 +80,8 @@ public class MainSinglet {
     public void selectTrk(int position){
         try {
             JSONObject obj = mJSONArrayTrk.getJSONObject(position);
-            mJSONArraySelectedTrkRestarant = obj.getJSONArray("restaurants");
+            //mJSONArraySelectedTrkRestarant = obj.getJSONArray("restaurants");
+            mJSONArraySelectedTrkRestarant = new JSONArray("[{\"id\":1,\"name\":\"РћРєРѕР»РёС†Р°\",\"city\":\"РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі\",\"address\":\"РїСЂ. РїСЂРѕСЃРІРµС‰РµРЅРёСЏ 19\",\"latitude\":0,\"longitude\":0,\"cityMollID\":1029038014413654016,\"ownerID\":3},{\"id\":2,\"name\":\"KFC\",\"city\":\"РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі\",\"address\":\"РїСЂ. РїСЂРѕСЃРІРµС‰РµРЅРёСЏ 19\",\"latitude\":0,\"longitude\":0,\"cityMollID\":1029038014413654016,\"ownerID\":2}]");//"{"id":3,"name":"KFC","city":"РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі","address":"РїСЂРѕСЃРї. Р­РЅРіРµР»СЊСЃР°, 154","latitude":0,"longitude":0,"cityMollID":7676728332671206400,"ownerID":2},{"id":4,"name":"BlackStar Burger","city":"РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі","address":"Р›РёРіРѕРІСЃРєРёР№ РїСЂРѕСЃРї., 30","latitude":0,"longitude":0,"cityMollID":7676728332671206400,"ownerID":4}]
         } catch (JSONException e) {
             e.printStackTrace();
         }

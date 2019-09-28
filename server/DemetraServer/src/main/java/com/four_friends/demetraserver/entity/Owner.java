@@ -8,10 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * @author gekko
  */
 @DatabaseTable
-public class Owner {
-
-    @DatabaseField(generatedId = true)
-    private long id;
+public class Owner extends Entity{
 
     @DatabaseField
     private String ownerName;
@@ -44,14 +41,6 @@ public class Owner {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
 }

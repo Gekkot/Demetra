@@ -6,6 +6,7 @@
 package com.four_friends.demetraserver.http.jetty.servlets;
 
 import com.four_friends.demetraserver.http.jetty.HttpHelper;
+import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,17 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RequestRestarauntNearestServlet extends HttpServlet{
     
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            
-        } catch (Exception e) {
-            try {
-                HttpHelper.answerError(resp, e);
-            } catch (Exception ex) {
-                //
-            }
-
-        }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+      HttpHelper.answerError(resp, new UnsupportedOperationException("not implement yet"));
     }
 
 }
