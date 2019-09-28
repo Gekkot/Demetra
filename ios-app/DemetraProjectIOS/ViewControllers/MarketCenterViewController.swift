@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 import GoogleMaps
 
 protocol MarketCenterViewControllerDelegate {
     func toggleMenu()
 }
 
-var chooseMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "newPlaceIconMenu"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0)
+var saveMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "newPlaceIconMenu"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0)
 
 class MarketCenterViewController: UIViewController {
 
@@ -22,9 +23,9 @@ class MarketCenterViewController: UIViewController {
     var marketCenters: [MarketCenter] = []
     var cameras: [GMSCameraPosition] = []
     var delegate: MarketCenterViewControllerDelegate?
+    
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var marketCenterTable: UITableView!
-    
     @IBAction func MenuToggleAction(_ sender: UIButton) {
         delegate?.toggleMenu()
     }
@@ -61,7 +62,7 @@ class MarketCenterViewController: UIViewController {
     }
     
     func createMarketCenterArray(){
-        guard let url = URL(string: "http://91.218.249.70:4004/city_malls") else {print("Invalid URL"); return}
+        guard let url = URL(string: "http://172.20.42.77:4004/city_mall") else {print("Invalid URL"); return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let dataResponse = data, error == nil else{print(error?.localizedDescription ?? "Response error"); return }
             do{
@@ -95,6 +96,7 @@ class MarketCenterViewController: UIViewController {
 }
 
 extension MarketCenterViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return marketCenters.count
         
@@ -104,19 +106,20 @@ extension MarketCenterViewController: UITableViewDelegate, UITableViewDataSource
         let marketCenter = marketCenters[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MarketCenterCell") as! MarketCenterCell
         cell.printMarketCenter(marketCenter: marketCenter)
-        
         cell.actionHandler = { [weak self] cell in
             let marketCenterViewController = self?.storyboard?.instantiateInitialViewController() as! MarketCenterViewController
             self!.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             self?.navigationController?.pushViewController(marketCenterViewController, animated: true)
-            chooseMarketCenter = marketCenter
-            tableView.deselectRow(at: indexPath, animated: true)
         }
         cell.buttonAction = { (cell) in
             self.showTappedMarkerCenter(number: indexPath.row)
         }
+        
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        saveMarketCenter = self.marketCenters[indexPath.row]
+        return indexPath
+    }
 }

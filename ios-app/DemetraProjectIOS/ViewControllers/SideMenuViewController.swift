@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SideMenuViewController: UIViewController {
     
     var sideMenuTableView: UITableView!
@@ -20,15 +21,13 @@ class SideMenuViewController: UIViewController {
         self.view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         configureSideMenuImageView()
         configureSideMenuTableView()
-        
-        
     }
     
     func configureSideMenuTableView(){
         sideMenuTableView = UITableView()
         sideMenuTableView.delegate = self
         sideMenuTableView.dataSource = self
-        sideMenuTableView.register(MenuTableCell.self, forCellReuseIdentifier: MenuTableCell.reuseId)
+        sideMenuTableView.register(SideMenuTableCell.self, forCellReuseIdentifier: SideMenuTableCell.reuseId)
         view.addSubview(sideMenuTableView)
         sideMenuTableView.frame = view.bounds
         
@@ -55,7 +54,7 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = sideMenuTableView.dequeueReusableCell(withIdentifier: MenuTableCell.reuseId) as! MenuTableCell
+        let cell = sideMenuTableView.dequeueReusableCell(withIdentifier: SideMenuTableCell.reuseId) as! SideMenuTableCell
         let menuModel = MenuModel(rawValue: indexPath.row)
         cell.iconImageView.image = menuModel?.image
         cell.myLabel.text = menuModel?.description

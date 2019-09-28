@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuTableCell: UITableViewCell {
+class SideMenuTableCell: UITableViewCell {
 
     static let reuseId = "MenuTableCell"
     
