@@ -1,18 +1,24 @@
 package com.example.demetra;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +61,7 @@ public class TrkListFragment extends Fragment {
         protected String doInBackground(Void... voids) {
             try {
                 String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
-                urlStr = "http://91.218.249.70:4004/city_malls?lat="+40+"&long="+60;
+                urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_malls?lat="+40+"&long="+60;
                 Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
                 Log.i(TAG, s);
@@ -87,6 +93,10 @@ public class TrkListFragment extends Fragment {
 
         public void bind(int position)
         {
+            ImageView iv = (ImageView) this.itemView.findViewById(R.id.icon_trk);
+            new DownloadImageTask(iv)
+                    //.execute(MainSinglet.get().getIconTrkUrl(position));
+                    .execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
             mTrkName = this.itemView.findViewById(R.id.trk_name);
             mTrkName.setText(MainSinglet.get().getNameTrk(position));
             mTrkDistance =  this.itemView.findViewById(R.id.trk_distance);
@@ -108,7 +118,7 @@ public class TrkListFragment extends Fragment {
             else {
                 Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
                 MainSinglet.get().selectTrk(this.getPosition());
-                Intent intent = new Intent(getActivity(), RestarantListActivity.class);
+                Intent intent = new Intent(getActivity(), RestaurantListActivity.class);
                 startActivity(intent);
             }
         }

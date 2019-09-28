@@ -164,7 +164,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
             LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
             if(latLng != null) {
                 MarkerOptions marker = new MarkerOptions().position(latLng).title(this.getResources().getString(R.string.you_there));
-                //marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_current_location));
                 mMap.addMarker(marker);
             }
             if(mSelectedTrkLatLng != null){

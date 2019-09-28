@@ -28,15 +28,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainDisplayActivity">
+        <activity android:name=".MainDisplayActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".RestarantListActivity">
+        <activity android:name=".RestaurantListActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".MenuActivity">
+        <activity android:name=".MenuActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".BasketActivity"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

@@ -73,11 +73,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/imageView6"
+
+        <TextView
+            android:id="@+id/busy"
             android:layout_width="match_parent"
-            android:layout_height="10mm"
-            tools:src="@mipmap/ic_launcher" />
+            android:layout_height="10mm"/>
 
         <TextView
             android:id="@+id/textView5"
