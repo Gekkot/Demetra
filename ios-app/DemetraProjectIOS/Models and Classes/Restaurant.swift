@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Restaurant {
+    
     var image: UIImage
     var id: Int
     var name: String
@@ -19,8 +20,9 @@ class Restaurant {
     var latitude: Double
     var cityMollId: Int
     var ownerId: Int
+    var imageUrl: String
     
-    init(image: UIImage, id: Int, name: String, city: String, address: String, longitude: Double, latitude: Double, cityMollId: Int, ownerId: Int){
+    init(image: UIImage, id: Int, name: String, city: String, address: String, longitude: Double, latitude: Double, cityMollId: Int, ownerId: Int, imageUrl: String){
         self.image = image
         self.id = id
         self.name = name
@@ -30,5 +32,6 @@ class Restaurant {
         self.latitude = latitude
         self.cityMollId = cityMollId
         self.ownerId = ownerId
+        self.imageUrl = imageUrl
     }
 }
