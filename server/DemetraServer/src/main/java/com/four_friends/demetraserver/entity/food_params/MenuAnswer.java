@@ -22,33 +22,39 @@ public class MenuAnswer {
     Long restarauntId;
     List<FoodCategory> foodCategoryList = new ArrayList<>();
     
-    List<MenuPosition> getMenuPositionsOfCategory(List<MenuPosition> menuPositions,FoodCategory foodCategory){
+    public static List<MenuPosition> getMenuPositionsOfCategory(List<MenuPosition> menuPositions,FoodCategory foodCategory){
         return menuPositions.stream().filter((t) -> {
             return t.getFoodCategory().getId() == foodCategory.getId();
         }).collect(Collectors.toList());
     }
     
-    private JsonObject createCategoryToJson(FoodCategory foodCategory,List<MenuPosition> menuPositions){
-         Gson gson = new Gson();
-         JsonObject categoryJsonObject = new JsonObject();
-         categoryJsonObject.addProperty("name", foodCategory.name);
-         categoryJsonObject.addProperty("description", foodCategory.description);
-         categoryJsonObject.addProperty("id", foodCategory.getId());
-         List<MenuPosition> menuPositionsOfCategory = getMenuPositionsOfCategory(menuPositions, foodCategory);
-         JsonArray jsonArray = new JsonArray();
-         for(MenuPosition menuPosition: menuPositionsOfCategory){
-             JsonObject jsonObject = new JsonObject();
-             jsonObject.addProperty("name", menuPosition.getName());
-             jsonObject.addProperty("description", menuPosition.getDescription());
-             jsonObject.addProperty("price", menuPosition.getPrice());
-             jsonObject.addProperty("id", menuPosition.getId());
+    private static JsonObject createCategoryToJson(FoodCategory foodCategory, List<MenuPosition> menuPositions) {
+        Gson gson = new Gson();
+        JsonObject categoryJsonObject = new JsonObject();
+        categoryJsonObject.addProperty("name", foodCategory.name);
+        categoryJsonObject.addProperty("description", foodCategory.description);
+        categoryJsonObject.addProperty("id", foodCategory.getId());
+        List<Topping> toppings = foodCategory.getToppings();
+        List<FoodSize> foodSizes = foodCategory.getFoodSizes();
+        JsonElement toppingsJsonElement = gson.toJsonTree(toppings);
+        JsonElement foodSizesJsonElement = gson.toJsonTree(foodSizes);
+        categoryJsonObject.add("toppings", toppingsJsonElement.getAsJsonArray());
+        categoryJsonObject.add("foodSizes", foodSizesJsonElement.getAsJsonArray());
+        List<MenuPosition> menuPositionsOfCategory = getMenuPositionsOfCategory(menuPositions, foodCategory);
+        JsonArray jsonArray = new JsonArray();
+        for (MenuPosition menuPosition : menuPositionsOfCategory) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("name", menuPosition.getName());
+            jsonObject.addProperty("description", menuPosition.getDescription());
+            jsonObject.addProperty("price", menuPosition.getPrice());
+            jsonObject.addProperty("id", menuPosition.getId());
              jsonArray.add(jsonObject);
          }
          categoryJsonObject.getAsJsonObject().add("menuPositions", jsonArray);
          return categoryJsonObject.getAsJsonObject();
     }
     
-    JsonElement createJsonObject(Menu menu){
+    public static JsonElement createJsonObject(Menu menu){
         Set<FoodCategory> foodCategories = menu.getFoodCategory();
         List<MenuPosition> menuPositions = menu.getMenuPositions();
         

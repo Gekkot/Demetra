@@ -50,7 +50,7 @@ public class MenuAnswerTest {
         MenuPosition menuPositionBorsht = new MenuPosition("Борщ");
         menuPositionBorsht.setDescription("Борщ");
         menuPositionBorsht.setFoodCategory(foodCategorySoup);
-        
+   
         MenuPosition menuPositionShi = new MenuPosition("Щи");
         menuPositionShi.setDescription("Щи");
         menuPositionShi.setFoodCategory(foodCategorySoup);
