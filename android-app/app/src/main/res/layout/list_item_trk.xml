@@ -74,10 +74,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+<!--        <TextView
             android:id="@+id/busy"
             android:layout_width="match_parent"
-            android:layout_height="10mm"/>
+            android:layout_height="10mm"/>-->
+
+        <ProgressBar
+            android:id="@+id/busy"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10mm"
+            android:max="10"
+            android:progress="9"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/custom_progress"/>
 
         <TextView
             android:id="@+id/textView5"

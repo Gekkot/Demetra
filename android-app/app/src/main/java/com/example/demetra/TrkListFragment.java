@@ -14,7 +14,6 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,8 +61,9 @@ public class TrkListFragment extends Fragment {
         protected String doInBackground(Void... voids) {
             try {
                 //String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
-                latitude = 60.05; longitude=30.33;
+                //latitude = 60.05; longitude=30.33;
                 String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_mall?lat="+latitude+"&long="+longitude;
+                Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
                 return s;
 
@@ -115,13 +115,11 @@ public class TrkListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             if(view.equals(mOnMapImageView)) {
-                //Toast.makeText(getActivity(), this.getPosition() + "button", Toast.LENGTH_SHORT).show();
                 if(mOnMapButtonListener != null) {
                     mOnMapButtonListener.OnMapButtonClick(view, MainSinglet.get().getLatLngTrk(this.getPosition()), mTrkName.getText().toString());
                 }
             }
             else {
-                Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
                 MainSinglet.get().selectTrk(this.getPosition());
                 Intent intent = new Intent(getActivity(), RestaurantListActivity.class);
                 startActivity(intent);

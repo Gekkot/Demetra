@@ -14,4 +14,7 @@
     <string name="basket_is_empty">Корзина пуста</string>
     <string name="to_pay">К оплате</string>
     <string name="size">Размер</string>
+    <string name="req_loc">"Разрешите приложению использовать местонахождение, иначе мы не сможем продолжить работу"</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

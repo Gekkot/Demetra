@@ -105,6 +105,19 @@ public class BasketSinglet {
             try {
                 jsonObject = mBasketJSONArray.getJSONObject(position);
                 cost += jsonObject.getDouble("price") * jsonObject.getInt("count");
+
+                if(jsonObject.has("foodSizes")){
+                    int size = 0;
+                    if(jsonObject.has("selectSize")){
+                        size = jsonObject.getInt("selectSize");
+                                            }
+                    JSONArray jsonArray = jsonObject.getJSONArray("foodSizes");
+                    if(size > jsonArray.length()) size = 0;
+                    if(jsonArray.length() != 0){
+                        if(jsonArray.getJSONObject(size).has("price"))
+                            cost += jsonArray.getJSONObject(size).getDouble("price");
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
