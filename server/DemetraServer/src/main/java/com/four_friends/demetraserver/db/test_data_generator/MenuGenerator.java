@@ -57,6 +57,7 @@ public class MenuGenerator {
     
     public static FoodCategory createSoupFoodCategory() {
         FoodCategory foodCategorySoup = new FoodCategory("Супы");
+        foodCategorySoup.setId(1);
         List<Topping> createSoupTopping = createSoupTopping();
         for (Topping soupTopping : createSoupTopping) {
             foodCategorySoup.addTopping(soupTopping);
@@ -65,6 +66,7 @@ public class MenuGenerator {
     }
     public static FoodCategory createCategoryPizza() {
         FoodCategory foodCategoryPizza = new FoodCategory("Пицца");
+        foodCategoryPizza.setId(2);
         List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
         for (FoodSize foodSize : createPizzaFoodSizes) {
             foodCategoryPizza.addFoodSize(foodSize);
