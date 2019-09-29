@@ -69,6 +69,7 @@ public class Main {
             CityMall greadCanionCityMall = CityMallGenerator.getGreadCanionCityMall();
             CityMall nordCityMall = CityMallGenerator.getNordCityMall();
             CityMall galeryCityMall = CityMallGenerator.getGaleryCityMall();
+            CityMall pickCityMall = CityMallGenerator.getPickCityMall();
             
             
             bkOwner = dataProvider.addOwner(bkOwner);
@@ -89,6 +90,8 @@ public class Main {
             Restaraunt blackstarGalery = RestarauntGenerator.createRestaunt(galeryCityMall, blackStarBurgerOwner);
             blackstarGalery = dataProvider.addRestaraunt(blackstarGalery);
             
+            Restaraunt bkPick = RestarauntGenerator.createRestaunt(pickCityMall, bkOwner);
+            bkPick = dataProvider.addRestaraunt(bkPick);
             
             greadCanionCityMall.addRestaraunt(kfcCanion);
             
@@ -97,9 +100,12 @@ public class Main {
             
             galeryCityMall.addRestaraunt(blackstarGalery);
             
+            pickCityMall.addRestaraunt(bkPick);
+            
             nordCityMall = dataProvider.addCityMall(nordCityMall);
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);
             galeryCityMall = dataProvider.addCityMall(galeryCityMall);
+            pickCityMall = dataProvider.addCityMall(pickCityMall);
             
             Actions actions  = ActionsGenerator.createActions();
 
