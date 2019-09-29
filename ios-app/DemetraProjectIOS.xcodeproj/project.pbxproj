@@ -25,6 +25,8 @@
 		FDF7A102233F96D80094A2E3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A101233F96D80094A2E3 /* MenuViewController.swift */; };
 		FDF7A108233FC7010094A2E3 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A107233FC7010094A2E3 /* CategoriesCollectionViewCell.swift */; };
 		FDF7A10A233FCC7E0094A2E3 /* RestaurantMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A109233FCC7E0094A2E3 /* RestaurantMenuCell.swift */; };
+		FDF7A10C23400FB50094A2E3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A10B23400FB50094A2E3 /* Food.swift */; };
+		FDF7A10E234029090094A2E3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7A10D234029090094A2E3 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		FDF7A101233F96D80094A2E3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		FDF7A107233FC7010094A2E3 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDF7A109233FCC7E0094A2E3 /* RestaurantMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMenuCell.swift; sourceTree = "<group>"; };
+		FDF7A10B23400FB50094A2E3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		FDF7A10D234029090094A2E3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,8 @@
 				FDF7A0F1233EA0D60094A2E3 /* Restaurant.swift */,
 				FDF7A0F3233EA1190094A2E3 /* MarketCenter.swift */,
 				FDF7A0EE233E8E450094A2E3 /* MenuModel.swift */,
+				FDF7A10B23400FB50094A2E3 /* Food.swift */,
+				FDF7A10D234029090094A2E3 /* Category.swift */,
 			);
 			path = "Models and Classes";
 			sourceTree = "<group>";
@@ -265,10 +271,12 @@
 			files = (
 				FDF7A0D7233E681F0094A2E3 /* MarketCenterViewController.swift in Sources */,
 				FDF7A0E7233E6A450094A2E3 /* SideMenuViewController.swift in Sources */,
+				FDF7A10C23400FB50094A2E3 /* Food.swift in Sources */,
 				FDF7A0F4233EA1190094A2E3 /* MarketCenter.swift in Sources */,
 				FDF7A0EF233E8E450094A2E3 /* MenuModel.swift in Sources */,
 				FDF7A0F2233EA0D60094A2E3 /* Restaurant.swift in Sources */,
 				FDF7A10A233FCC7E0094A2E3 /* RestaurantMenuCell.swift in Sources */,
+				FDF7A10E234029090094A2E3 /* Category.swift in Sources */,
 				FDF7A0E9233E6A870094A2E3 /* ContainerViewController.swift in Sources */,
 				FDF7A108233FC7010094A2E3 /* CategoriesCollectionViewCell.swift in Sources */,
 				FDF7A0EC233E87580094A2E3 /* SideMenuTableCell.swift in Sources */,

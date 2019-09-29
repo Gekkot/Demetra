@@ -33,6 +33,7 @@ public class TrkListFragment extends Fragment {
     private trkAdapter mTrkAdapter;
     private GoogleMap mMap;
     private static String TAG = "trkListFragment";
+    private ProgressBar mProgressBar;
 
     private OnMapButtonListener mOnMapButtonListener;
 
@@ -60,15 +61,13 @@ public class TrkListFragment extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
-                urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_malls?lat="+40+"&long="+60;
-                Log.i(TAG, urlStr);
+                //String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
+                latitude = 60.05; longitude=30.33;
+                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_mall?lat="+latitude+"&long="+longitude;
                 String s = Fetchr.getUrlString(urlStr);
-                Log.i(TAG, s);
                 return s;
 
             } catch (IOException e) {
-                e.printStackTrace();
             }
             return null;
         }
@@ -76,8 +75,14 @@ public class TrkListFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            MainSinglet.get().onNewListTrks(s);
-            updateUI();
+            if(s!= null) {
+                MainSinglet.get().onNewListTrks(s);
+                updateUI();
+            }
+            else {
+                LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
+                onUpdateLocation(latLng.latitude, latLng.longitude);
+            }
         }
     };
 
@@ -95,8 +100,8 @@ public class TrkListFragment extends Fragment {
         {
             ImageView iv = (ImageView) this.itemView.findViewById(R.id.icon_trk);
             new DownloadImageTask(iv)
-                    //.execute(MainSinglet.get().getIconTrkUrl(position));
-                    .execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    .execute(MainSinglet.get().getIconTrkUrl(position));
+                    //.execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
             mTrkName = this.itemView.findViewById(R.id.trk_name);
             mTrkName.setText(MainSinglet.get().getNameTrk(position));
             mTrkDistance =  this.itemView.findViewById(R.id.trk_distance);
@@ -153,13 +158,18 @@ public class TrkListFragment extends Fragment {
         View v = inflater.inflate(R.layout.trk_list_layout, container, false);
         mTrkListRecyclerView = v.findViewById(R.id.RecyclerViewTrkList);
         mTrkListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        mProgressBar = v.findViewById(R.id.progressBar);
         updateUI();
         return v;
     }
 
     private void updateUI() {
         if(isAdded()) {
+            if(MainSinglet.get().getCountTrk() == 0){
+                mProgressBar.setVisibility(View.VISIBLE);
+            }else {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
             mTrkAdapter = new trkAdapter();
             mTrkListRecyclerView.setAdapter(mTrkAdapter);
         }

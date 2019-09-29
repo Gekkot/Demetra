@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class MenuActivity extends MainDrawerActivity {
     public static final String RESTAURANT_ID_BUNDLE = "RESTAURANT_ID_BUNDLE";
     private static final String TAG = "MenuActivity";
     private JSONArray mMenuJSONArray;
+    private long mRestaurantId;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,13 @@ public class MenuActivity extends MainDrawerActivity {
         /* Получить идентификатор тревоги. */
         Intent intent = getIntent();
         long restaurantId;
-        restaurantId = intent.getLongExtra( RESTAURANT_ID_BUNDLE, -1 );
+        mRestaurantId = intent.getLongExtra( RESTAURANT_ID_BUNDLE, -1 );
         /* Получить тревогу по ее идентификатору. */
-        if(restaurantId == -1)
+        if(mRestaurantId == -1)
             finish();
 
-        new FetchRestaurantMenu(restaurantId).execute();
-
+        new FetchRestaurantMenu(mRestaurantId).execute();
+        mProgressBar = findViewById(R.id.progressBar);
         //updateUI();
     }
 
@@ -58,10 +61,12 @@ public class MenuActivity extends MainDrawerActivity {
     }
 
     private void fillRestaurantDescription(){
-        JSONObject jsonObject = MainSinglet.get().getSelectedRestaurant();
+/*        JSONObject jsonObject = MainSinglet.get().getSelectedRestaurant();
         String name;
         String urlIcon = null;
         if(jsonObject == null) finish();
+
+        Log.i(TAG,jsonObject.toString());
 
         try {
             name = jsonObject.getString("name");
@@ -80,9 +85,46 @@ public class MenuActivity extends MainDrawerActivity {
         iv.setImageResource(R.mipmap.ic_launcher);
         if(urlIcon != null) {
             new DownloadImageTask(iv)
-                    //.execute(MainSinglet.get().getIconTrkUrl(urlIcon));
-                    .execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    .execute(urlIcon);
+                    //.execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+                    //.execute("https://aliton.ru/img/site-pix/nord-logo-240-120.jpg");
+
+        }*/
+
+
+        String name = "name";
+        String urlIcon = null;
+        String description = "null";
+        JSONObject jsonObject = MainSinglet.get().getSelectedRestaurant();
+        if(jsonObject == null) return;
+
+        try {
+            name = jsonObject.getString("name");
+        } catch (JSONException e) {
         }
+
+        try {
+            urlIcon = jsonObject.getString("imageUrl");
+        } catch (JSONException e) {
+        }
+
+        try {
+            description = jsonObject.getString("description");
+        } catch (JSONException e) {
+        }
+
+
+        TextView tv= (TextView) findViewById(R.id.restaurant_name);
+        tv.setText(name);
+        tv = (TextView) findViewById(R.id.restaurant_description);
+        tv.setText(description);
+        ImageView iv = findViewById(R.id.icon_restaurant);
+        iv.setImageResource(R.mipmap.ic_launcher);
+        if(urlIcon != null)
+            new DownloadImageTask(iv)
+                    .execute(urlIcon);
+        //.execute("https://lh3.googleusercontent.com/1v-Ay1AmsukO2sCByosCdvr3061uG8UKUfpzlPxO8Xi1TPSnVVyBkA90cqiRgxa6kdM=s180");
+        //.execute("https://aliton.ru/img/site-pix/nord-logo-240-120.jpg");
     }
 
     public class FetchRestaurantMenu extends AsyncTask<Void,Void,String> {
@@ -96,7 +138,7 @@ public class MenuActivity extends MainDrawerActivity {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/restaraunt_menu?restarauntId="+mRestaurantId;
+                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/menu?restarauntId="+mRestaurantId;
                 Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
                 Log.i(TAG, s);
@@ -112,13 +154,15 @@ public class MenuActivity extends MainDrawerActivity {
         protected void onPostExecute(String s) {
             Log.i(TAG, "menu json:" + s);
             super.onPostExecute(s);
+            if(s == null) {
+                return;
+            }
             try {
                 JSONObject obj = new JSONObject(s);
                 if(obj.getString("result").toLowerCase().equals("ok") == false){
                     finish();
                 }
-                //mMenuJSONArray = new JSONObject(s).getJSONArray("data");
-                mMenuJSONArray = new JSONArray("[{\"name\":\"Супы\",\"description\":\"Супы description\",\"menuPositions\":[{\"id\":1,\"name\":\"Борщ\",\"description\":\"Борщ description\",\"price\":3.0},{\"id\":2,\"name\":\"Щи\",\"description\":\"Щи description\",\"price\":5.0}]}]");
+                mMenuJSONArray = new JSONObject(s).getJSONArray("data");
             } catch (JSONException e) {
                 e.printStackTrace();
                 finish();
@@ -129,6 +173,9 @@ public class MenuActivity extends MainDrawerActivity {
     };
 
     private void updateUI(){
+        if(mMenuJSONArray != null && mMenuJSONArray.length() != 0){
+            mProgressBar.setVisibility(View.GONE);
+        }
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);

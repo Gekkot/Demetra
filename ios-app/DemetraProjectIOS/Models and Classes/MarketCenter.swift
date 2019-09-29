@@ -11,6 +11,7 @@ import UIKit
 
 
 class MarketCenter {
+    
     var image: UIImage
     var id: Int
     var name: String
@@ -20,8 +21,9 @@ class MarketCenter {
     var clusterId: Int
     var longitude: Double
     var latitude: Double
+    var url: String
     
-    init(image: UIImage, id: Int, name: String, restaurantsIds: [Int], city: String, address: String, clusterId: Int, longitude: Double, latitude: Double){
+    init(image: UIImage, id: Int, name: String, restaurantsIds: [Int], city: String, address: String, clusterId: Int, longitude: Double, latitude: Double, url: String){
         self.image = image
         self.id = id
         self.name = name
@@ -31,5 +33,6 @@ class MarketCenter {
         self.clusterId = clusterId
         self.longitude = longitude
         self.latitude = latitude
+        self.url = url
     }
 }

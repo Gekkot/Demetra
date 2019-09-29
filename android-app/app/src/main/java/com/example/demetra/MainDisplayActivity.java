@@ -99,9 +99,19 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
                     REQ_LOCATION_PERMISSION);
         } else {
             LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
-            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
+            //manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
+            //manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        removeAllMarkers();
+        updateMapMarkers();
+        moveCameraOnUser();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.example.demetra;
 
+import android.location.LocationListener;
 import android.os.Build;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 public class BasketSinglet {
     private static BasketSinglet self = null;
     private JSONArray mBasketJSONArray;
+    private final String TAG = "BasketSinglet";
 
     private BasketSinglet(){
         try {
@@ -107,5 +110,24 @@ public class BasketSinglet {
             }
         }
         return cost;
+    }
+
+    public void onSetMenuPositionSize(JSONObject mJSONObject, int i) {
+        JSONObject jsonObject;
+        long id;
+        try {
+            id = mJSONObject.getLong("id");
+            for (int position = 0; position < mBasketJSONArray.length(); position++) {
+                jsonObject = mBasketJSONArray.getJSONObject(position);
+                if(jsonObject.getLong("id") == id){
+                    jsonObject.put("selectSize", i);
+                    return;
+                }
+            }
+            mJSONObject.put("selectSize", i);
+            mBasketJSONArray.put(mJSONObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

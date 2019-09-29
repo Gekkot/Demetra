@@ -14,7 +14,7 @@ protocol MarketCenterViewControllerDelegate {
     func toggleMenu()
 }
 
-var saveMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "newPlaceIconMenu"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0)
+var saveMarketCenter: MarketCenter = MarketCenter(image: #imageLiteral(resourceName: "newPlaceIconMenu"), id: 0, name: "", restaurantsIds: [], city: "", address: "", clusterId: 0, longitude: 0.0, latitude: 0.0, url: "")
 
 class MarketCenterViewController: UIViewController {
 
@@ -82,11 +82,14 @@ class MarketCenterViewController: UIViewController {
                     guard let clusterId = jsonArray[i]["clusterId"] as? Int else {print("Invalid \(i) clusterId"); return}
                     guard let longitude = jsonArray[i]["longitude"] as? Double else {print("Invalid \(i) longitude"); return}
                     guard let latitude = jsonArray[i]["latitude"] as? Double else {print("Invalid \(i) latitude"); return}
-                    
-                    let image: UIImage!
-                    image = #imageLiteral(resourceName: "recommendationIconMenu")
-                    
-                    let marketCenter = MarketCenter(image: image, id: id, name: name, restaurantsIds: restaurantIds, city: city, address: address, clusterId: clusterId, longitude: longitude, latitude: latitude)
+                    guard let url = jsonArray[i]["imageUrl"] as? String else {print("Invalid \(i) url"); return}
+                    let imageUrl = URL(string: url)
+                    var image: UIImage!
+                    do{
+                        let data = try Data(contentsOf: imageUrl!)
+                        image = UIImage(data: data)!
+                    } catch let error{print(error.localizedDescription); return}
+                    let marketCenter = MarketCenter(image: image, id: id, name: name, restaurantsIds: restaurantIds, city: city, address: address, clusterId: clusterId, longitude: longitude, latitude: latitude, url: url)
                     self.marketCenters.append(marketCenter)
                 }
             }catch let error{print(error.localizedDescription); return}
