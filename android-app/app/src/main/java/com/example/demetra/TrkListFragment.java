@@ -62,7 +62,7 @@ public class TrkListFragment extends Fragment {
         protected String doInBackground(Void... voids) {
             try {
                 //String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
-                latitude = 60.05; longitude=30.33;
+                //latitude = 60.05; longitude=30.33;
                 String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_mall?lat="+latitude+"&long="+longitude;
                 String s = Fetchr.getUrlString(urlStr);
                 return s;

@@ -2,6 +2,8 @@ package com.example.demetra;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,9 +24,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -54,6 +59,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
     private LatLng mSelectedTrkLatLng;
     private String mSelectedTrkString;
     private static final int REQ_LOCATION_PERMISSION = 1;
+    private final String TAG = "MainDisplayActivity";
 
 
     @Override
@@ -98,6 +104,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQ_LOCATION_PERMISSION);
         } else {
+            //EnableGPSIfPossible();
             LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             //manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
             //manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
@@ -124,6 +131,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
                                            @NonNull int[] grantResults) {
         if (requestCode == REQ_LOCATION_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //EnableGPSIfPossible();
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
@@ -268,7 +276,10 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
 
     @Override
     public void onProviderDisabled(String s) {
-        Toast.makeText(getApplicationContext(), "onProviderDisabled", Toast.LENGTH_LONG).show();
+        Log.i(TAG, "onProviderDisabled " + s);
+        Toast.makeText(getApplicationContext(), "onProviderDisabled "+ s, Toast.LENGTH_LONG).show();
+        if(s.toLowerCase().equals("network"))
+            EnableGPSIfPossible();
     }
 
 
@@ -300,5 +311,31 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
         removeAllMarkers();
         updateMapMarkers();
         moveCameraOnUser();
+    }
+
+    private void EnableGPSIfPossible()
+    {
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        }
+    }
+
+    private  void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.req_loc))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 }

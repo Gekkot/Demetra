@@ -28,4 +28,7 @@
     <string name="basket_is_empty">Basket is empty</string>
     <string name="to_pay">To pay</string>
     <string name="size">Size</string>
+    <string name="req_loc">"Yout GPS seems to be disabled, do you want to enable it?"</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
