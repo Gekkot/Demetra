@@ -22,15 +22,18 @@ public class MenuGenerator {
     public static List<Topping> createSoupTopping() {
         List<Topping> soupToppings = new ArrayList<>();
         Topping crackersTopping = new Topping();
+        crackersTopping.setId(21L);
         crackersTopping.setName("Сухарики");
         crackersTopping.setName("Сухарики из белого хлеба");
         crackersTopping.setPrice(15.0f);
         
         Topping extraMeatTopping = new Topping();
+        extraMeatTopping.setId(22L);
         extraMeatTopping.setName("Дополнительное мясо");
         extraMeatTopping.setPrice(45.0f);
         
         Topping sosiageTopping = new Topping();
+        sosiageTopping.setId(23L);
         sosiageTopping.setName("Сосиски");
         sosiageTopping.setPrice(35.0f);
         
@@ -43,10 +46,12 @@ public class MenuGenerator {
         List<FoodSize> foodSizes = new ArrayList<>();
         
         FoodSize foodSizeSmall = new FoodSize();
+        foodSizeSmall.setId(31L);
         foodSizeSmall.setName("Маленькая");
         foodSizeSmall.setPrice(56.0f);
         
         FoodSize foodSizeKingSize = new FoodSize();
+        foodSizeKingSize.setId(32L);
         foodSizeKingSize.setName("Королевский размер");
         foodSizeKingSize.setPrice(777.0f);
         
@@ -74,6 +79,7 @@ public class MenuGenerator {
         
         MenuPosition menuPositionBorsht = new MenuPosition("Борщ");
         menuPositionBorsht.setDescription("Борщ");
+        menuPositionBorsht.setId(41L);
         List<Topping> createSoupTopping = createSoupTopping();
         for (Topping soupTopping : createSoupTopping) {
             menuPositionBorsht.addTopping(soupTopping);
@@ -82,12 +88,14 @@ public class MenuGenerator {
         
         MenuPosition menuPositionShi = new MenuPosition("Щи");
         menuPositionShi.setDescription("Щи");
+        menuPositionShi.setId(42L);
         for (Topping soupTopping : createSoupTopping) {
             menuPositionShi.addTopping(soupTopping);
         }
         menuPositionShi.setFoodCategory(soupFoodCategory);
     
         MenuPosition menuPositionQuadroFormaggi = new MenuPosition("Пицца 4 сыра");
+        menuPositionQuadroFormaggi.setId(43L);
         List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
         for (FoodSize foodSize : createPizzaFoodSizes) {
             menuPositionQuadroFormaggi.addFoodSize(foodSize);
