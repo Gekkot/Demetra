@@ -19,6 +19,25 @@ import java.util.List;
  */
 public class MenuGenerator {
 
+    
+    public static List<Topping> createPizzaTopping(){
+        List<Topping> pizzaToppings = new ArrayList<>();
+        Topping shampinionsTopping = new Topping();
+        shampinionsTopping.setDescription("Шампиньоны");
+        shampinionsTopping.setId(121L);
+        shampinionsTopping.setName("Шампиньоны");
+        shampinionsTopping.setPrice(25.0f);
+        pizzaToppings.add(shampinionsTopping);
+        
+        Topping pepperTopping = new Topping();
+        pepperTopping.setName("Халапеньо");
+        pepperTopping.setDescription("Острые перчики халапеньо");
+        pepperTopping.setPrice(14.0f);
+        pepperTopping.setId(122L);
+        pizzaToppings.add(pepperTopping);
+        return pizzaToppings;
+        
+    }
     public static List<Topping> createSoupTopping() {
         List<Topping> soupToppings = new ArrayList<>();
         Topping crackersTopping = new Topping();
@@ -48,12 +67,12 @@ public class MenuGenerator {
         FoodSize foodSizeSmall = new FoodSize();
         foodSizeSmall.setId(31L);
         foodSizeSmall.setName("Маленькая");
-        foodSizeSmall.setPrice(56.0f);
+        foodSizeSmall.setPrice(0);
         
         FoodSize foodSizeKingSize = new FoodSize();
         foodSizeKingSize.setId(32L);
         foodSizeKingSize.setName("Королевский размер");
-        foodSizeKingSize.setPrice(777.0f);
+        foodSizeKingSize.setPrice(250.0f);
         
         foodSizes.add(foodSizeSmall);
         foodSizes.add(foodSizeKingSize);
@@ -99,9 +118,14 @@ public class MenuGenerator {
         MenuPosition menuPositionQuadroFormaggi = new MenuPosition("Пицца 4 сыра");
         menuPositionQuadroFormaggi.setImageUrl("https://pizzaman.ru/image/cache/data/pizzy/4%20сыра-760x440.png");
         menuPositionQuadroFormaggi.setId(43L);
+        menuPositionQuadroFormaggi.setPrice(250.0f);
         List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
         for (FoodSize foodSize : createPizzaFoodSizes) {
             menuPositionQuadroFormaggi.addFoodSize(foodSize);
+        }
+        List<Topping> createPizzaTopping = createPizzaTopping();
+        for(Topping topping: createPizzaTopping){
+            menuPositionQuadroFormaggi.addTopping(topping);
         }
         menuPositionQuadroFormaggi.setFoodCategory(pizzaFoodCategory);
         

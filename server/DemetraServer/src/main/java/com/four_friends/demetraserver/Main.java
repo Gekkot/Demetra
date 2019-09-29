@@ -63,6 +63,9 @@ public class Main {
             Owner okolitcaOwner = OwnerGenerator.getOkolitcaOwner();
             okolitcaOwner.addFoodTag(russianTag);
             
+            Owner eurasiaOwner = OwnerGenerator.getEurasiaOwner();
+            eurasiaOwner.addFoodTag(asianTag);
+            
             Owner blackStarBurgerOwner = OwnerGenerator.getBlackStarBurgerOwner();
             blackStarBurgerOwner.addFoodTag(burgerTag);
             
@@ -76,6 +79,7 @@ public class Main {
             kfcOwner = dataProvider.addOwner(kfcOwner);
             okolitcaOwner = dataProvider.addOwner(okolitcaOwner);
             blackStarBurgerOwner = dataProvider.addOwner(blackStarBurgerOwner);
+            eurasiaOwner = dataProvider.addOwner(eurasiaOwner);
             
             
             Restaraunt okolitacaNord = RestarauntGenerator.createRestaunt(nordCityMall, okolitcaOwner);
@@ -93,6 +97,9 @@ public class Main {
             Restaraunt bkPick = RestarauntGenerator.createRestaunt(pickCityMall, bkOwner);
             bkPick = dataProvider.addRestaraunt(bkPick);
             
+            Restaraunt eurasiaPick = RestarauntGenerator.createRestaunt(pickCityMall, eurasiaOwner);
+            eurasiaPick = dataProvider.addRestaraunt(eurasiaPick);
+            
             greadCanionCityMall.addRestaraunt(kfcCanion);
             
             nordCityMall.addRestaraunt(kfcNord);
@@ -101,6 +108,7 @@ public class Main {
             galeryCityMall.addRestaraunt(blackstarGalery);
             
             pickCityMall.addRestaraunt(bkPick);
+            pickCityMall.addRestaraunt(eurasiaPick);
             
             nordCityMall = dataProvider.addCityMall(nordCityMall);
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);

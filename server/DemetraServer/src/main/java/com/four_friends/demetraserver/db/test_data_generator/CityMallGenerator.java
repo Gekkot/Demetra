@@ -74,6 +74,11 @@ public class CityMallGenerator {
         pickCityMall.setUrl("http://tk-pik.ru/");
         pickCityMall.setAddress("ул. Ефимова, д.2");
         pickCityMall.setLocation("59.926437, 30.320587");
+        try {
+            pickCityMall.calClusterId();
+        } catch (WrongLocationException ex) {
+            Logger.getLogger(CityMallGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pickCityMall.setImageUrl("https://kalashnikovav.ru/wp-content/uploads/2014/10/2-1.jpg");
         return pickCityMall;
     }
