@@ -49,9 +49,11 @@ public class CityMallServlet extends CachingServlets{
                 double latValue = Double.parseDouble(latString);
                 double longValue = Double.parseDouble(longString);
                 long locationToClusterIndex = LocationHelper.LocationToClusterIndex(latValue, longValue);
+                List<Long> neighbours = LocationHelper.getNeighbours(locationToClusterIndex);
+                neighbours.add(locationToClusterIndex);
                 //TODO: replace with sql query.
                 List<CityMall> collect = restarauntCache.getCityMalls().stream().filter((cityMall) -> {
-                    return cityMall.getClusterId() == locationToClusterIndex;
+                    return neighbours.contains(cityMall.getClusterId());
                 }).collect(Collectors.toList());
                 List<CityMall> copy = new ArrayList<>();
                 for(CityMall cityMall : collect){
