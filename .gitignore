@@ -28,3 +28,4 @@ server/DemetraServer/deploy-server-vk\.sh
 
 server/DemetraServer/persephone\.db
 /server/DemetraServer/nbproject/
+server/DemetraServer/nbactions\.xml
