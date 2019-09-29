@@ -9,6 +9,7 @@ import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundEx
 import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
 import com.four_friends.demetraserver.db.sqlite.SqliteDBConnect;
 import com.four_friends.demetraserver.db.sqlite.SqliteDataProvider;
+import com.four_friends.demetraserver.db.test_data_generator.ActionsGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.CityMallGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.FoodTagGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.OwnerGenerator;
@@ -100,11 +101,7 @@ public class Main {
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);
             galeryCityMall = dataProvider.addCityMall(galeryCityMall);
             
-            Actions actions  = new Actions();
-            actions.setShortDescription("Распродажа бургеров");
-            actions.setStartDate("25.09.2019");
-            actions.setEndDate("30.09.2019");
-            dataProvider.addAction(actions);
+            Actions actions  = ActionsGenerator.createActions();
 
         } catch (OwnerNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,9 +111,7 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FoodTagNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ActionsNotFoundException ex) {
-              Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-          }
+        }
         
     }
     public static void main(String[] args) {
