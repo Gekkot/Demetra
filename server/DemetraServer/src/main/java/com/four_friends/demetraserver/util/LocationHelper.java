@@ -6,6 +6,9 @@
 package com.four_friends.demetraserver.util;
 
 import com.four_friends.demetraserver.util.exception.WrongLocationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -13,7 +16,27 @@ import com.four_friends.demetraserver.util.exception.WrongLocationException;
  * @author gekko
  */
 public class LocationHelper {
+    
+    private final static int clustersInLatitude = 10000;
+    private final static int clustersInLongitude = 10000;
+    private final static long MAX_CLUSTERS = clustersInLatitude * clustersInLongitude;
 
+    public static List<Long> getNeighbours(long clusterId){
+        List<Long> neighbours  = new ArrayList<>();
+        neighbours.add(clusterId - 1);
+        neighbours.add(clusterId + 1);
+        neighbours.add(clusterId - 10000);
+        neighbours.add(clusterId + 10000);
+
+        neighbours.add(clusterId - 10000 - 1);
+        neighbours.add(clusterId - 10000 + 1);
+
+        neighbours.add(clusterId + 10000 - 1);
+        neighbours.add(clusterId + 10000 + 1);
+        return neighbours.stream().filter((id) -> {
+            return id >= 0 && id < MAX_CLUSTERS ;
+        }).collect(Collectors.toList());
+    }
     public static long LocationToClusterIndex(double latitude, double longitude) throws WrongLocationException {
         if (latitude < -90 || latitude > 90) {
             throw new WrongLocationException("wrong latitude: " + latitude);
@@ -22,9 +45,9 @@ public class LocationHelper {
             throw new WrongLocationException("wrong longitude: " + longitude);
         }
         latitude = 180.0 - latitude;
-        int latitudeIndex = (int) ((latitude / 180.0) * 10000);
-        int longitudeIndex = (int) ((longitude / 360.0) * 10000);
-        return latitudeIndex * 10000 + longitudeIndex;
+        int latitudeIndex = (int) ((latitude / 180.0) * clustersInLatitude);
+        int longitudeIndex = (int) ((longitude / 360.0) * clustersInLongitude);
+        return latitudeIndex * clustersInLatitude + longitudeIndex;
     }
     
     public static double distanceBetweenLocations(double lat1, double lon1, double lat2, double lon2){
