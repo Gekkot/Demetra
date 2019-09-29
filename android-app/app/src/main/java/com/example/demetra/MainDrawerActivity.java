@@ -1,5 +1,6 @@
 package com.example.demetra;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
@@ -19,6 +22,8 @@ import androidx.fragment.app.FragmentManager;
 public abstract class MainDrawerActivity extends AppCompatActivity {
 
     protected MainDrawerFragment mMainDrawerFragment;
+    protected ImageView mBasketButton;
+    protected TextView mSumBasket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,26 @@ public abstract class MainDrawerActivity extends AppCompatActivity {
         ll.addView(toolbar, 0);
         toolbar.addView(button);
         setSupportActionBar(toolbar);
+        mBasketButton = new ImageView(this);
+
+        mBasketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(BasketSinglet.get().isEmpty()) {
+                    Toast.makeText(getBaseContext(), getResources().getString(R.string.basket_is_empty), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Intent intent = new Intent(getBaseContext(), BasketActivity.class);
+                startActivity(intent);
+            }
+        });
+        toolbar.addView(mBasketButton);
+        mSumBasket = new TextView(getBaseContext());
+        mSumBasket.setTextColor(getResources().getColor(R.color.white));
+        toolbar.addView(mSumBasket);
+
+        onUpdateBasket();
     }
 
     @Override
@@ -70,6 +95,20 @@ public abstract class MainDrawerActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void onUpdateBasket(){
+        if(BasketSinglet.get().isEmpty())
+            mBasketButton.setImageResource(R.mipmap.ic_basket_icon_empty);
+        else
+            mBasketButton.setImageResource(R.mipmap.ic_basket_icon_notempty);
+        double cost = BasketSinglet.get().getCost();
+        if(cost == 0.0){
+            mSumBasket.setText("");
+        }else {
+            long c = Math.round(cost);
+            mSumBasket.setText(c + "р");
         }
     }
 

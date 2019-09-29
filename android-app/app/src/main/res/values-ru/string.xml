@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="on_map">На карте</string>
+    <string name="busy">Загружен</string>
+    <string name="you_there">Вы сдесь</string>
+    <string name="stocks">Акции</string>
+    <string name="new_places">Новые места</string>
+    <string name="recommends">Рекомендации</string>
+    <string name="settings">Настройки</string>
+    <string name="help">Помощь</string>
+    <string name="about">О программе</string>
+    <string name="count">Кл.</string>
+    <string name="add_topping">Топпинг</string>
+    <string name="basket_is_empty">Корзина пуста</string>
+    <string name="to_pay">К оплате</string>
+    <string name="size">Размер</string>
+</resources>

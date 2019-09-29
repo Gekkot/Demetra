@@ -99,9 +99,19 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
                     REQ_LOCATION_PERMISSION);
         } else {
             LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
-            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
+            //manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 500, this);
+            //manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        removeAllMarkers();
+        updateMapMarkers();
+        moveCameraOnUser();
     }
 
     @Override
@@ -164,7 +174,7 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
             LatLng latLng = MainSinglet.get().getMyCurrentLatLng();
             if(latLng != null) {
                 MarkerOptions marker = new MarkerOptions().position(latLng).title(this.getResources().getString(R.string.you_there));
-                //marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_current_location));
                 mMap.addMarker(marker);
             }
             if(mSelectedTrkLatLng != null){

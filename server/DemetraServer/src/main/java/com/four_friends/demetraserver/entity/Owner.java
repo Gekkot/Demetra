@@ -60,4 +60,14 @@ public class Owner extends Entity{
         this.foodTagIds = idsList.toArray(new Long[0]);
     }
 
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+     
+     
+
 }

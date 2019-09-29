@@ -14,9 +14,6 @@ public class FoodSize extends Entity {
 
     @DatabaseField
     String name;
-
-    @DatabaseField
-    long id;
     
     @DatabaseField
     float price;
@@ -29,14 +26,6 @@ public class FoodSize extends Entity {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public float getPrice() {
         return price;
     }
@@ -44,6 +33,7 @@ public class FoodSize extends Entity {
     public void setPrice(float price) {
         this.price = price;
     }
+    
     
     
 }

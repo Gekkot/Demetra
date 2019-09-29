@@ -2,16 +2,19 @@ package com.four_friends.demetraserver;
 
 import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.db.data_provider.IDataProvider;
+import com.four_friends.demetraserver.db.data_provider.exception.ActionsNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.CityMallNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.FoodTagNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.OwnerNotFoundException;
 import com.four_friends.demetraserver.db.data_provider.exception.RestarauntNotFoundException;
 import com.four_friends.demetraserver.db.sqlite.SqliteDBConnect;
 import com.four_friends.demetraserver.db.sqlite.SqliteDataProvider;
+import com.four_friends.demetraserver.db.test_data_generator.ActionsGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.CityMallGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.FoodTagGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.OwnerGenerator;
 import com.four_friends.demetraserver.db.test_data_generator.RestarauntGenerator;
+import com.four_friends.demetraserver.entity.Actions;
 import com.four_friends.demetraserver.entity.CityMall;
 import com.four_friends.demetraserver.entity.FoodTag;
 import com.four_friends.demetraserver.entity.Owner;
@@ -97,6 +100,9 @@ public class Main {
             nordCityMall = dataProvider.addCityMall(nordCityMall);
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);
             galeryCityMall = dataProvider.addCityMall(galeryCityMall);
+            
+            Actions actions  = ActionsGenerator.createActions();
+
         } catch (OwnerNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RestarauntNotFoundException ex) {

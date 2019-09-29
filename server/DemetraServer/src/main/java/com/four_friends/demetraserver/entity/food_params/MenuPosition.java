@@ -4,6 +4,7 @@ import com.four_friends.demetraserver.entity.Entity;
 import com.j256.ormlite.field.DatabaseField;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -16,6 +17,7 @@ public class MenuPosition extends Entity {
 
     public MenuPosition(String name) {
         this.name = name;
+        this.description = "";
     }
     
     
@@ -34,6 +36,69 @@ public class MenuPosition extends Entity {
     
     @DatabaseField
     Long[] toppingsIds = new Long[]{};
+    
+    @DatabaseField
+    String imageUrl;
+    
+    
+    @DatabaseField
+    Long[] foodSizeIds = new Long[]{};
+    
+    List<FoodSize> foodSizes = new ArrayList<>();
+    
+     public void addTopping(Topping topping){
+        this.toppings.add(topping);
+        updateToppingIds();
+    }
+    
+    public void addFoodSize(FoodSize foodSize){
+        this.foodSizes.add(foodSize);
+        updateFoodSizeIds();
+    }
+    private void updateToppingIds() {
+        Long[] updatedeToppingIds = this.toppings
+                .stream()
+                .filter(Objects::nonNull)
+                .map((current_topping) -> {
+                    return current_topping.getId();
+                }).toArray(Long[]::new);
+        setToppingsIds(updatedeToppingIds);
+    }
+    
+    private void updateFoodSizeIds() {
+         Long[] updatedeFoodSizeIds = this.foodSizes
+                .stream()
+                .filter(Objects::nonNull)
+                .map((currentFoodsize) -> {
+                    return currentFoodsize.getId();
+                }).toArray(Long[]::new);
+        setFoodSizeIds(updatedeFoodSizeIds);
+    }
+
+    public Long[] getFoodSizeIds() {
+        return foodSizeIds;
+    }
+
+    public void setFoodSizeIds(Long[] foodSizeIds) {
+        this.foodSizeIds = foodSizeIds;
+    }
+
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
+    }
+
+    public List<FoodSize> getFoodSizes() {
+        return foodSizes;
+    }
+
+    public void setFoodSizes(List<FoodSize> foodSizes) {
+        this.foodSizes = foodSizes;
+    }
+   
 
     public String getName() {
         return name;
@@ -66,9 +131,21 @@ public class MenuPosition extends Entity {
     public void setPrice(float price) {
         this.price = price;
     }
-    
-    
-    
-    
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Long[] getToppingsIds() {
+        return toppingsIds;
+    }
+
+    public void setToppingsIds(Long[] toppingsIds) {
+        this.toppingsIds = toppingsIds;
+    }
     
 }
