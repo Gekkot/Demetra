@@ -79,6 +79,7 @@ public class MenuGenerator {
         
         MenuPosition menuPositionBorsht = new MenuPosition("Борщ");
         menuPositionBorsht.setDescription("Борщ");
+        menuPositionBorsht.setImageUrl("https://img03.rl0.ru/eda/c620x415i/s2.eda.ru/StaticContent/Photos/120213174921/1202131749503/p_O.jpg");
         menuPositionBorsht.setId(41L);
         List<Topping> createSoupTopping = createSoupTopping();
         for (Topping soupTopping : createSoupTopping) {
@@ -88,6 +89,7 @@ public class MenuGenerator {
         
         MenuPosition menuPositionShi = new MenuPosition("Щи");
         menuPositionShi.setDescription("Щи");
+        menuPositionShi.setImageUrl("https://cdn.lifehacker.ru/wp-content/uploads/2015/11/shutterstock_310946489_1446296212-1140x570.jpg");
         menuPositionShi.setId(42L);
         for (Topping soupTopping : createSoupTopping) {
             menuPositionShi.addTopping(soupTopping);
@@ -95,6 +97,7 @@ public class MenuGenerator {
         menuPositionShi.setFoodCategory(soupFoodCategory);
     
         MenuPosition menuPositionQuadroFormaggi = new MenuPosition("Пицца 4 сыра");
+        menuPositionQuadroFormaggi.setImageUrl("https://pizzaman.ru/image/cache/data/pizzy/4 сыра-760x440.png");
         menuPositionQuadroFormaggi.setId(43L);
         List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
         for (FoodSize foodSize : createPizzaFoodSizes) {
