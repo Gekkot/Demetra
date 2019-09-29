@@ -100,6 +100,7 @@ public class MenuGenerator {
         menuPositionBorsht.setDescription("Борщ");
         menuPositionBorsht.setImageUrl("https://img03.rl0.ru/eda/c620x415i/s2.eda.ru/StaticContent/Photos/120213174921/1202131749503/p_O.jpg");
         menuPositionBorsht.setId(41L);
+        menuPositionBorsht.setPrice(120.0f);
         List<Topping> createSoupTopping = createSoupTopping();
         for (Topping soupTopping : createSoupTopping) {
             menuPositionBorsht.addTopping(soupTopping);
@@ -110,6 +111,7 @@ public class MenuGenerator {
         menuPositionShi.setDescription("Щи");
         menuPositionShi.setImageUrl("https://cdn.lifehacker.ru/wp-content/uploads/2015/11/shutterstock_310946489_1446296212-1140x570.jpg");
         menuPositionShi.setId(42L);
+        menuPositionShi.setPrice(100.0f);
         for (Topping soupTopping : createSoupTopping) {
             menuPositionShi.addTopping(soupTopping);
         }
