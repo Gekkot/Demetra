@@ -35,6 +35,7 @@ public class MenuAnswer {
         JsonArray jsonArray = new JsonArray();
         for (MenuPosition menuPosition : menuPositionsOfCategory) {
             JsonObject jsonObject = gson.toJsonTree(menuPosition).getAsJsonObject();
+            jsonObject.remove("foodCategory");
              jsonArray.add(jsonObject);
          }
          categoryJsonObject.getAsJsonObject().add("menuPositions", jsonArray);
