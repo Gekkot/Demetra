@@ -63,18 +63,23 @@ public class Main {
             Owner okolitcaOwner = OwnerGenerator.getOkolitcaOwner();
             okolitcaOwner.addFoodTag(russianTag);
             
+            Owner eurasiaOwner = OwnerGenerator.getEurasiaOwner();
+            eurasiaOwner.addFoodTag(asianTag);
+            
             Owner blackStarBurgerOwner = OwnerGenerator.getBlackStarBurgerOwner();
             blackStarBurgerOwner.addFoodTag(burgerTag);
             
             CityMall greadCanionCityMall = CityMallGenerator.getGreadCanionCityMall();
             CityMall nordCityMall = CityMallGenerator.getNordCityMall();
             CityMall galeryCityMall = CityMallGenerator.getGaleryCityMall();
+            CityMall pickCityMall = CityMallGenerator.getPickCityMall();
             
             
             bkOwner = dataProvider.addOwner(bkOwner);
             kfcOwner = dataProvider.addOwner(kfcOwner);
             okolitcaOwner = dataProvider.addOwner(okolitcaOwner);
             blackStarBurgerOwner = dataProvider.addOwner(blackStarBurgerOwner);
+            eurasiaOwner = dataProvider.addOwner(eurasiaOwner);
             
             
             Restaraunt okolitacaNord = RestarauntGenerator.createRestaunt(nordCityMall, okolitcaOwner);
@@ -89,6 +94,11 @@ public class Main {
             Restaraunt blackstarGalery = RestarauntGenerator.createRestaunt(galeryCityMall, blackStarBurgerOwner);
             blackstarGalery = dataProvider.addRestaraunt(blackstarGalery);
             
+            Restaraunt bkPick = RestarauntGenerator.createRestaunt(pickCityMall, bkOwner);
+            bkPick = dataProvider.addRestaraunt(bkPick);
+            
+            Restaraunt eurasiaPick = RestarauntGenerator.createRestaunt(pickCityMall, eurasiaOwner);
+            eurasiaPick = dataProvider.addRestaraunt(eurasiaPick);
             
             greadCanionCityMall.addRestaraunt(kfcCanion);
             
@@ -97,9 +107,13 @@ public class Main {
             
             galeryCityMall.addRestaraunt(blackstarGalery);
             
+            pickCityMall.addRestaraunt(bkPick);
+            pickCityMall.addRestaraunt(eurasiaPick);
+            
             nordCityMall = dataProvider.addCityMall(nordCityMall);
             greadCanionCityMall = dataProvider.addCityMall(greadCanionCityMall);
             galeryCityMall = dataProvider.addCityMall(galeryCityMall);
+            pickCityMall = dataProvider.addCityMall(pickCityMall);
             
             Actions actions  = ActionsGenerator.createActions();
 

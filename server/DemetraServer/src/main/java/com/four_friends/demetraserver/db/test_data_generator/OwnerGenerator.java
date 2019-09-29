@@ -60,6 +60,16 @@ public class OwnerGenerator {
         okolitcaOwner.setUrl("");
         return okolitcaOwner;
     }
+    
+    public static Owner getEurasiaOwner(){
+        Owner eurasiaOwner = new Owner();
+        eurasiaOwner.setOwnerName("Евразия");
+        eurasiaOwner.setOwnerRestarauntName("Евразия");
+        eurasiaOwner.setUrl("");
+        eurasiaOwner.setLogoUrl("https://p1.zoon.ru/preview/V9XYqb3oENIwG65gZg7pjg/604x376x85/0/7/3/514c0ed5a0f302702d000017_514c13cfb001c.jpg");
+        return eurasiaOwner;
+        
+    }
 
     public static Owner[] getOwners() {
         return new Owner[]{

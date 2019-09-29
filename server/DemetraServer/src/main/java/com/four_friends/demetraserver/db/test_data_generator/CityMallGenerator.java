@@ -66,11 +66,28 @@ public class CityMallGenerator {
         }
         return cityMall;
     }
-    
+      
+     public static CityMall getPickCityMall() {
+        CityMall pickCityMall = new CityMall();
+        pickCityMall.setName("ТК ПИК");
+        pickCityMall.setCity("Санкт-Петербург");
+        pickCityMall.setUrl("http://tk-pik.ru/");
+        pickCityMall.setAddress("ул. Ефимова, д.2");
+        pickCityMall.setLocation("59.926437, 30.320587");
+        try {
+            pickCityMall.calClusterId();
+        } catch (WrongLocationException ex) {
+            Logger.getLogger(CityMallGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pickCityMall.setImageUrl("https://kalashnikovav.ru/wp-content/uploads/2014/10/2-1.jpg");
+        return pickCityMall;
+    }
+
     public static CityMall[] getCityMalls(){
         return new CityMall[]{
             getGreadCanionCityMall(),
-            getNordCityMall()
+            getNordCityMall(),
+            getPickCityMall()
         };
     }
 }
