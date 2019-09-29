@@ -34,6 +34,10 @@ public class MenuPosition extends Entity {
     
     @DatabaseField
     Long[] toppingsIds = new Long[]{};
+    
+    @DatabaseField
+    String imageUrl;
+   
 
     public String getName() {
         return name;
@@ -66,6 +70,15 @@ public class MenuPosition extends Entity {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
     
     
     
