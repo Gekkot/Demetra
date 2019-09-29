@@ -33,6 +33,7 @@ public class TrkListFragment extends Fragment {
     private trkAdapter mTrkAdapter;
     private GoogleMap mMap;
     private static String TAG = "trkListFragment";
+    private ProgressBar mProgressBar;
 
     private OnMapButtonListener mOnMapButtonListener;
 
@@ -63,14 +64,10 @@ public class TrkListFragment extends Fragment {
                 //String urlStr = "http://91.218.249.70:4004/city_malls?lat="+latitude+"&long="+longitude;
                 latitude = 60.05; longitude=30.33;
                 String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_mall?lat="+latitude+"&long="+longitude;
-                //urlStr = "http://"+MainSinglet.SERVER_ADDR+"/city_malls?lat="+40+"&long="+60;
-                Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
-                Log.i(TAG, s);
                 return s;
 
             } catch (IOException e) {
-                e.printStackTrace();
             }
             return null;
         }
@@ -161,13 +158,18 @@ public class TrkListFragment extends Fragment {
         View v = inflater.inflate(R.layout.trk_list_layout, container, false);
         mTrkListRecyclerView = v.findViewById(R.id.RecyclerViewTrkList);
         mTrkListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        mProgressBar = v.findViewById(R.id.progressBar);
         updateUI();
         return v;
     }
 
     private void updateUI() {
         if(isAdded()) {
+            if(MainSinglet.get().getCountTrk() == 0){
+                mProgressBar.setVisibility(View.VISIBLE);
+            }else {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
             mTrkAdapter = new trkAdapter();
             mTrkListRecyclerView.setAdapter(mTrkAdapter);
         }

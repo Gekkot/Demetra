@@ -81,7 +81,7 @@ public class RestaurantListFragment extends Fragment {
                 }
 
                 try {
-                    description = mJSONObject.getString("descriptor");
+                    description = mJSONObject.getString("description");
                 } catch (JSONException e) {
                 }
             }

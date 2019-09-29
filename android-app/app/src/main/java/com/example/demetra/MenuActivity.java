@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ public class MenuActivity extends MainDrawerActivity {
     private static final String TAG = "MenuActivity";
     private JSONArray mMenuJSONArray;
     private long mRestaurantId;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MenuActivity extends MainDrawerActivity {
             finish();
 
         new FetchRestaurantMenu(mRestaurantId).execute();
-
+        mProgressBar = findViewById(R.id.progressBar);
         //updateUI();
     }
 
@@ -107,7 +109,7 @@ public class MenuActivity extends MainDrawerActivity {
         }
 
         try {
-            description = jsonObject.getString("descriptor");
+            description = jsonObject.getString("description");
         } catch (JSONException e) {
         }
 
@@ -136,7 +138,7 @@ public class MenuActivity extends MainDrawerActivity {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/restaraunt_menu?restarauntId="+mRestaurantId;
+                String urlStr = "http://"+MainSinglet.SERVER_ADDR+"/menu?restarauntId="+mRestaurantId;
                 Log.i(TAG, urlStr);
                 String s = Fetchr.getUrlString(urlStr);
                 Log.i(TAG, s);
@@ -153,12 +155,6 @@ public class MenuActivity extends MainDrawerActivity {
             Log.i(TAG, "menu json:" + s);
             super.onPostExecute(s);
             if(s == null) {
-                try {
-                    mMenuJSONArray = new JSONArray("[{\"name\":\"Супы\",\"description\":\"Супы description\",\"menuPositions\":[{\"id\":1,\"name\":\"Борщ\",\"description\":\"Борщ description\",\"price\":3.0},{\"id\":2,\"name\":\"Щи\",\"description\":\"Щи description\",\"price\":5.0}]}]");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                updateUI();
                 return;
             }
             try {
@@ -166,24 +162,20 @@ public class MenuActivity extends MainDrawerActivity {
                 if(obj.getString("result").toLowerCase().equals("ok") == false){
                     finish();
                 }
-                //mMenuJSONArray = new JSONObject(s).getJSONArray("data");
+                mMenuJSONArray = new JSONObject(s).getJSONArray("data");
             } catch (JSONException e) {
                 e.printStackTrace();
                 finish();
             }
-
-            try {
-                mMenuJSONArray = new JSONArray("[{\"name\":\"Супы\",\"description\":\"Супы description\",\"menuPositions\":[{\"id\":1,\"name\":\"Борщ\",\"description\":\"Борщ description\",\"price\":3.0},{\"id\":2,\"name\":\"Щи\",\"description\":\"Щи description\",\"price\":5.0}]}]");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
 
             updateUI();
         }
     };
 
     private void updateUI(){
+        if(mMenuJSONArray != null && mMenuJSONArray.length() != 0){
+            mProgressBar.setVisibility(View.GONE);
+        }
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);

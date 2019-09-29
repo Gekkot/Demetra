@@ -27,5 +27,5 @@
     <string name="add_topping">Add topping</string>
     <string name="basket_is_empty">Basket is empty</string>
     <string name="to_pay">To pay</string>
-
+    <string name="size">Size</string>
 </resources>
