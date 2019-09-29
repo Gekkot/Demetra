@@ -97,7 +97,7 @@ public class MenuGenerator {
         menuPositionShi.setFoodCategory(soupFoodCategory);
     
         MenuPosition menuPositionQuadroFormaggi = new MenuPosition("Пицца 4 сыра");
-        menuPositionQuadroFormaggi.setImageUrl("https://pizzaman.ru/image/cache/data/pizzy/4 сыра-760x440.png");
+        menuPositionQuadroFormaggi.setImageUrl("https://pizzaman.ru/image/cache/data/pizzy/4%20сыра-760x440.png");
         menuPositionQuadroFormaggi.setId(43L);
         List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
         for (FoodSize foodSize : createPizzaFoodSizes) {
