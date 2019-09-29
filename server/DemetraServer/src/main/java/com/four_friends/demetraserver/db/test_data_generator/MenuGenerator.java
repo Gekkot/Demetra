@@ -58,19 +58,11 @@ public class MenuGenerator {
     public static FoodCategory createSoupFoodCategory() {
         FoodCategory foodCategorySoup = new FoodCategory("Супы");
         foodCategorySoup.setId(1);
-        List<Topping> createSoupTopping = createSoupTopping();
-        for (Topping soupTopping : createSoupTopping) {
-            foodCategorySoup.addTopping(soupTopping);
-        }
         return foodCategorySoup;
     }
     public static FoodCategory createCategoryPizza() {
         FoodCategory foodCategoryPizza = new FoodCategory("Пицца");
         foodCategoryPizza.setId(2);
-        List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
-        for (FoodSize foodSize : createPizzaFoodSizes) {
-            foodCategoryPizza.addFoodSize(foodSize);
-        }
         return foodCategoryPizza;
     }
    
@@ -82,13 +74,24 @@ public class MenuGenerator {
         
         MenuPosition menuPositionBorsht = new MenuPosition("Борщ");
         menuPositionBorsht.setDescription("Борщ");
+        List<Topping> createSoupTopping = createSoupTopping();
+        for (Topping soupTopping : createSoupTopping) {
+            menuPositionBorsht.addTopping(soupTopping);
+        }
         menuPositionBorsht.setFoodCategory(soupFoodCategory);
         
         MenuPosition menuPositionShi = new MenuPosition("Щи");
         menuPositionShi.setDescription("Щи");
+        for (Topping soupTopping : createSoupTopping) {
+            menuPositionShi.addTopping(soupTopping);
+        }
         menuPositionShi.setFoodCategory(soupFoodCategory);
-        
+    
         MenuPosition menuPositionQuadroFormaggi = new MenuPosition("Пицца 4 сыра");
+        List<FoodSize> createPizzaFoodSizes = createPizzaFoodSizes();
+        for (FoodSize foodSize : createPizzaFoodSizes) {
+            menuPositionQuadroFormaggi.addFoodSize(foodSize);
+        }
         menuPositionQuadroFormaggi.setFoodCategory(pizzaFoodCategory);
         
         menu.addMenuPosition(menuPositionBorsht);
