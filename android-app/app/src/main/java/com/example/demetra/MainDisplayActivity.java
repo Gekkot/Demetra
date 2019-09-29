@@ -39,17 +39,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainDisplayActivity extends MainDrawerActivity implements OnMapReadyCallback, LocationListener, TrkListFragment.OnMapButtonListener {
 
@@ -138,7 +131,6 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
                     manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 500, this);
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "REQ_LOCATION_PERMISSION fail", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -254,7 +246,6 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(getApplicationContext(), "onLocationChanged claster: " + getClasterIndex(location.getLatitude(), location.getLongitude()), Toast.LENGTH_LONG).show();
         LatLng latLng = new LatLng(location.getLatitude(),  location.getLongitude());
         MainSinglet.get().setMyLatLng(latLng);
         if(mTrkListFragment != null)
@@ -266,18 +257,17 @@ public class MainDisplayActivity extends MainDrawerActivity implements OnMapRead
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-        Toast.makeText(getApplicationContext(), "onStatusChanged", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void onProviderEnabled(String s) {
-        Toast.makeText(getApplicationContext(), "onProviderEnabled", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void onProviderDisabled(String s) {
         Log.i(TAG, "onProviderDisabled " + s);
-        Toast.makeText(getApplicationContext(), "onProviderDisabled "+ s, Toast.LENGTH_LONG).show();
         if(s.toLowerCase().equals("network"))
             EnableGPSIfPossible();
     }

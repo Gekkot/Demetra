@@ -17,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -231,13 +230,12 @@ public class MenuFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(getActivity(), "onItemSelected " + i, Toast.LENGTH_SHORT).show();
             BasketSinglet.get().onSetMenuPositionSize(mJSONObject, i);
+            ((MainDrawerActivity) getActivity()).onUpdateBasket();
         }
 
         @Override

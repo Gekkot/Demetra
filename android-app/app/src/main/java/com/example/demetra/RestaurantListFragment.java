@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,7 +101,6 @@ public class RestaurantListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), this.getPosition() + "pos", Toast.LENGTH_SHORT).show();
             MainSinglet.get().selectRestaurant(this.getPosition());
             Intent intent = new Intent(getActivity(), MenuActivity.class);
             intent.putExtra(MenuActivity.RESTAURANT_ID_BUNDLE, mRestarantId);
