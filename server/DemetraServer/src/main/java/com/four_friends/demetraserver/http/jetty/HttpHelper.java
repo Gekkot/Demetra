@@ -59,12 +59,25 @@ public class HttpHelper {
         response.setHeader("Cache-Control", "no-cache");
         response.setStatus(HttpServletResponse.SC_OK);
     }
-
+    
     public static void answerEntities(HttpServletResponse response, List entities) throws UnsupportedEncodingException, IOException {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("result", "ok");
         Gson gson = new Gson();
         JsonElement jsonElement = gson.toJsonTree(entities);
+        jsonObject.add("data", jsonElement);
+        String reply = jsonObject.toString();
+        response.getOutputStream().write(reply.getBytes("UTF-8"));
+        response.setContentType("application/json; charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    public static void answerJson(HttpServletResponse response, JsonElement jsonElement) throws UnsupportedEncodingException, IOException {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("result", "ok");
+        Gson gson = new Gson();
         jsonObject.add("data", jsonElement);
         String reply = jsonObject.toString();
         response.getOutputStream().write(reply.getBytes("UTF-8"));

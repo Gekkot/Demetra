@@ -9,6 +9,8 @@ import com.four_friends.demetraserver.cache.RestarauntCache;
 import com.four_friends.demetraserver.http.jetty.servlets.ActionsServlet;
 import com.four_friends.demetraserver.http.jetty.servlets.CityMallServlet;
 import com.four_friends.demetraserver.http.jetty.servlets.FoodTagsServlet;
+import com.four_friends.demetraserver.http.jetty.servlets.MenuAddServler;
+import com.four_friends.demetraserver.http.jetty.servlets.MenuServlet;
 import com.four_friends.demetraserver.http.jetty.servlets.OwnersServlets;
 import com.four_friends.demetraserver.http.jetty.servlets.RequestRestarauntNearestServlet;
 import com.four_friends.demetraserver.http.jetty.servlets.RestarauntServlet;
@@ -62,6 +64,8 @@ public class OwnHttpServer {
         context.addServlet(new ServletHolder(new CityMallServlet(restarauntCache)), "/city_mall");
         context.addServlet(new ServletHolder(new RestarauntServlet(restarauntCache)), "/restaraunt");
         context.addServlet(new ServletHolder(new ActionsServlet(restarauntCache)), "/actions");
+        context.addServlet(new ServletHolder(new MenuServlet(restarauntCache)), "/menu");
+        context.addServlet(new ServletHolder(new MenuAddServler(restarauntCache)), "/menuAdd");
         server.setHandler(context);
         
         server.start();
